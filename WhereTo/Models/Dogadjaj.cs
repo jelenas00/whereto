@@ -12,5 +12,7 @@ namespace WhereTo.Models
         public Lokal? Organizator { get; set; }
         public List<Korisnik>? Korisnici { get; set; }
         public string? Datum { get; set; }
+
+        public List<string>? listaTagova { get; set; }
     }
 }

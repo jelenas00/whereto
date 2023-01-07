@@ -18,15 +18,33 @@ namespace WhereTo.DataLayer
             {
                 var db= _redis.GetDatabase();
                 var serialDog=JsonSerializer.Serialize(dog);
-                db.HashSet("dogadjajhash", new HashEntry[]{new HashEntry (dog.DogadjajID,serialDog)});
-                
+                if(dog.listaTagova!=null)
+                {
+                    foreach(string el in dog.listaTagova)
+                        db.HashSet(el, new HashEntry[]{new HashEntry (dog.DogadjajID,serialDog)});
+                }
+                db.HashSet(dog.Datum, new HashEntry[]{new HashEntry (dog.DogadjajID,serialDog)});
             }
         }
 
-        public IEnumerable<Dogadjaj?>? GetAllDogadjaji()
+        
+
+        public void DeleteDogadjaj(Dogadjaj dog)
+        {
+            var db =_redis.GetDatabase();
+            if(dog.listaTagova!=null)
+                {
+                    foreach(string el in dog.listaTagova)
+                        db.HashDelete(el,dog.DogadjajID);
+                }
+            db.HashDelete(dog.Datum,dog.DogadjajID);
+            
+            
+        }
+        public IEnumerable<Dogadjaj?>? GetAllDogadjaji(string tag)
         {
             var db=_redis.GetDatabase();
-            var allHash=db.HashGetAll("dogadjajhash");
+            var allHash=db.HashGetAll(tag);
             if(allHash.Length>0)
             {
                 var obj=Array.ConvertAll(allHash,val=>JsonSerializer.Deserialize<Dogadjaj>(val.Value)).ToList();
@@ -41,7 +59,7 @@ namespace WhereTo.DataLayer
             var db=_redis.GetDatabase();
             //var plat= db.StringGet(id);
 
-            var dog=db.HashGet("dogadjajhash",id);
+            var dog=db.HashGet("Dogadjaj",id);
 
             if(!string.IsNullOrEmpty(dog))
             {

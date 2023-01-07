@@ -6,6 +6,8 @@ namespace WhereTo.DataLayer
     {
         void CreateDogadjaj(Dogadjaj dog);
         Dogadjaj? GetDogadjajById(string id);
-        IEnumerable<Dogadjaj?>? GetAllDogadjaji();
+        IEnumerable<Dogadjaj?>? GetAllDogadjaji(string tag);
+        void DeleteDogadjaj(Dogadjaj dog);
+
     }
 }
