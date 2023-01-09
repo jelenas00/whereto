@@ -8,7 +8,7 @@ namespace WhereTo.Models
         public string? Vlasnik { get; set; }
         public string? RadnoVreme { get; set; }
         public string? Opis { get; set; }
-        public List<Dogadjaj>? Dogadjaji { get; set; }
+        public List<Dogadjaj?>? Dogadjaji { get; set; }
         public List<string>? Tagovi { get; set;}
     }
 }

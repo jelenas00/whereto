@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using StackExchange.Redis;
 
 namespace WhereTo.Models
 {
@@ -17,7 +18,5 @@ namespace WhereTo.Models
         public string Password { get; set; }=String.Empty;
         
         public List<Dogadjaj>? Dogadjaji { get; set; }
-
-
     }
 }

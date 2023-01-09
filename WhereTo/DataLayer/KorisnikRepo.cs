@@ -28,7 +28,7 @@ namespace WhereTo.DataLayer
         }
 
        
-        public IEnumerable<Korsnik?>? GetAllKorisnici()
+        public IEnumerable<Korisnik?>? GetAllKorisnici()
         {
             var db = _redis.GetDatabase();
             var korisnici = db.HashGetAll("korisnikHes");
@@ -47,9 +47,8 @@ namespace WhereTo.DataLayer
             {
                 var db = _redis.GetDatabase();
                 var serialKor = JsonSerializer.Serialize(korisnik);
+                db.HashSet("korisnikHes",new HashEntry[]{new HashEntry(korisnik.KorisnikID,serialKor)});
             }
-
-            // .... ....
         }
 
         public void DeleteKorisnik (string id)
@@ -62,6 +61,28 @@ namespace WhereTo.DataLayer
             }
         }
 
-        
+        public Korisnik? ChangeKorisnik(Korisnik korisnik)
+        {
+            var db= _redis.GetDatabase();
+            if(korisnik!=null)
+            {
+                //var stari= db.HashGet("korisnikHes",korisnik.KorisnikID);
+                Korisnik? novi= JsonSerializer.Deserialize<Korisnik>(db.HashGet("korisnikHes",korisnik.KorisnikID));
+                //if(!stari.IsNullOrEmpty)
+                if(novi!=null)
+                {
+                    //Korisnik novi= JsonSerializer.Deserialize<Korisnik>(stari);
+                    novi.Name=korisnik.Name;
+                    novi.LastName=korisnik.LastName;
+                    novi.Email=korisnik.Email;
+                    novi.Password=korisnik.Password;
+                    var upis= JsonSerializer.Serialize(novi);
+                    db.HashSet("korisnikHes",new HashEntry[]{new HashEntry(novi.KorisnikID,upis)});
+                    return novi;
+                }
+                return null;
+            }
+            return null;
+        }
     }
 }

@@ -13,9 +13,43 @@ namespace WhereTo.DataLayer
             _redis=redis;
         }
 
-        public void ChangeLokal(Lokal lok)
+        public Lokal? ChangeLokal(Lokal lok)
         {
-            throw new NotImplementedException();
+            var db= _redis.GetDatabase();
+            if(lok!=null)
+            {
+                //var stari= db.HashGet("korisnikHes",korisnik.KorisnikID);
+                Lokal? novi= JsonSerializer.Deserialize<Lokal>(db.HashGet("lokalihes",lok.LokalID));
+                //if(!stari.IsNullOrEmpty)
+                if(novi!=null)
+                {
+                    //Korisnik novi= JsonSerializer.Deserialize<Korisnik>(stari);
+                    novi.Name=lok.Name;
+                    novi.Opis=lok.Opis;
+                    novi.RadnoVreme=lok.RadnoVreme;
+                    novi.Lokacija=lok.Lokacija;
+                    /*if(lok.Tagovi!=null)
+                    {
+                        foreach(string el in lok.Tagovi)
+                            novi.Tagovi.Add(el);
+                    }
+                    else novi.Tagovi=null;
+                    if(lok.Dogadjaji!=null)
+                    {
+                        foreach(Dogadjaj el in lok.Dogadjaji)
+                            novi.Dogadjaji.Add(el);
+                    }
+                    else
+                        novi.Dogadjaji=null;*/
+                    novi.Tagovi=lok.Tagovi;
+                    novi.Dogadjaji=lok.Dogadjaji;
+                    var upis= JsonSerializer.Serialize(novi);
+                    db.HashSet("lokalihes",new HashEntry[]{new HashEntry(novi.LokalID,upis)});
+                    return novi;
+                }
+                return null;
+            }
+            return null;
         }
 
         public void CreateLokal(Lokal lok)
@@ -74,5 +108,6 @@ namespace WhereTo.DataLayer
         {
             throw new NotImplementedException();
         }
+
     }
 }

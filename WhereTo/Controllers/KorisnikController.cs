@@ -41,7 +41,7 @@ namespace WhereTo.Controllers
             return NotFound();
         }
 
-        [HttpPost]
+        [HttpPost(Name="CreateKorisnik")]
         public ActionResult<Korisnik> CreateKorisnik(Korisnik korisnik)
         {
             _repo.CreateKorisnik(korisnik);
@@ -60,6 +60,13 @@ namespace WhereTo.Controllers
                 return Ok("Korisnik deleted!");
             }
             return BadRequest("Invalid ID!");
+        }
+
+        [HttpPut(Name="ChangeKorisnik")]
+        public ActionResult<Korisnik>? ChangeKorisnik(Korisnik korisnik)
+        {
+            _repo.ChangeKorisnik(korisnik);
+            return CreatedAtRoute(nameof(GetKorisnikById), new {Id=korisnik.KorisnikID},korisnik);        
         }
     }
 }

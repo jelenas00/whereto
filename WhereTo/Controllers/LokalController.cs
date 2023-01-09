@@ -55,5 +55,12 @@ namespace WhereTo.Controllers
             }
             return BadRequest("Invalid id");
         }
+
+        [HttpPut(Name="ChangeLokal")]
+        public ActionResult<Lokal>? ChangeKorisnik(Lokal lok)
+        {
+            _repo.ChangeLokal(lok);
+            return CreatedAtRoute(nameof(GetLokalById), new {Id=lok.LokalID},lok);
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace WhereTo.DataLayer
         IEnumerable<Korisnik?>? GetAllKorisnici();
         void CreateKorisnik (Korisnik korisnik);
         void DeleteKorisnik (string id);
+
+        Korisnik? ChangeKorisnik(Korisnik korisnik);
         
     }
 }
