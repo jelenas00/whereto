@@ -8,9 +8,9 @@ namespace WhereTo.Controllers
     [ApiController]
     public class KorisnikController:ControllerBase
     {
-         private IDogadjajRepo _repo;
+         private IKorisnikRepo _repo;
 
-        public KorisnikController(IDogadjajRepo repo)
+        public KorisnikController(IKorisnikRepo repo)
         {
             _repo=repo;
         }
