@@ -4,7 +4,7 @@ using WhereTo.Models;
 
 namespace WhereTo.DataLayer
 {
-    public class KorisnikRepo: ILokalRepo
+    public class KorisnikRepo: IKorisnikRepo
     {
         private IConnectionMultiplexer _redis;
 

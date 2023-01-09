@@ -11,6 +11,8 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(opt=>
 );
 
 builder.Services.AddScoped<IDogadjajRepo, DogadjajRepo>();
+builder.Services.AddScoped<ILokalRepo, LokalRepo>();
+builder.Services.AddScoped<IKorisnikRepo, KorisnikRepo>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
