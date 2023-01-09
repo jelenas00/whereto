@@ -14,5 +14,52 @@ namespace WhereTo.Controllers
         {
             _repo=repo;
         }
+
+
+        [HttpGet("id/{id}", Name = "GetKorisnikById")]
+        public ActionResult<Korisnik> GetKorisnikById(string id)
+        {
+            var korisnik = _repo.GetKorisnikById(id);
+
+            if (korisnik != null)
+            {
+                return Ok(korisnik);
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet("", Name="GetAllKorisnici")]
+        public ActionResult<Korisnik> GetAllKorisnici()
+        {
+            var korisnici= _repo.GetAllKorisnici();
+            
+            if (korisnici != null)
+            {
+                return Ok(korisnici);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public ActionResult<Korisnik> CreateKorisnik(Korisnik korisnik)
+        {
+            _repo.CreateKorisnik(korisnik);
+
+            return CreatedAtRoute(nameof(GetKorisnikById), new {Id=korisnik.KorisnikID},korisnik);
+            //return Ok(korisnik);
+        }
+
+
+        [HttpDelete("id/{id}", Name ="DeleteKorisnik")]
+        public ActionResult<Korisnik>? DeleteKorisnik(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                _repo.DeleteKorisnik(id);
+                return Ok("Korisnik deleted!");
+            }
+            return BadRequest("Invalid ID!");
+        }
     }
 }
