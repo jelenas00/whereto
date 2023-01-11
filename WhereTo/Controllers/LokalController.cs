@@ -17,7 +17,8 @@ namespace WhereTo.Controllers
             _dogrepo=dogrepo;
         }
 
-        [HttpGet("id/{id}", Name="GetLokalById")]
+        [Route("GetLokalById/{id}")]
+        [HttpGet]//("id/{id}", Name="GetLokalById")]
         public ActionResult<Lokal> GetLokalById(string id)
         {
             var lokal= _repo.GetLokalById(id);
@@ -27,7 +28,7 @@ namespace WhereTo.Controllers
             }
             return NotFound();
         }
-
+        [Route("CreateLokal")]
         [HttpPost]
         public ActionResult<Lokal> CreateLokal(Lokal lok)
         {
@@ -44,7 +45,8 @@ namespace WhereTo.Controllers
             return Ok(lok);
         }
 
-        [HttpGet("", Name="GetLokali")]
+        [Route("GetAllLokali")]
+        [HttpGet]//("", Name="GetLokali")]
         public ActionResult<Lokal> GetLokali()
         {
             var lokal= _repo.GetAllLokali();
@@ -64,8 +66,8 @@ namespace WhereTo.Controllers
             }
             return NotFound();
         }
-
-        [HttpDelete("id/{id}", Name ="DeleteLokal")]
+        [Route("DeleteLokal/{id}")]
+        [HttpDelete]//("id/{id}", Name ="DeleteLokal")]
         public ActionResult<Lokal>? DeleteLokal(string id)
         {
             if(!string.IsNullOrEmpty(id))
@@ -88,8 +90,8 @@ namespace WhereTo.Controllers
             }
             return BadRequest("Invalid id");
         }
-
-        [HttpPut(Name="ChangeLokal")]
+        [Route("ChangeLokal")]
+        [HttpPut]//(Name="ChangeLokal")]
         public ActionResult<Lokal>? ChangeKorisnik(Lokal lok)
         {
             var lokal=_repo.GetLokalById(lok.LokalID);

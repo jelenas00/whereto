@@ -19,8 +19,8 @@ namespace WhereTo.Controllers
             _lokrepo=lokrepo;
         }
 
-
-        [HttpGet("id/{id}", Name = "GetKorisnikById")]
+        [Route("GetKorisnikById/{id}")]
+        [HttpGet]//("id/{id}", Name = "GetKorisnikById")]
         public ActionResult<Korisnik> GetKorisnikById(string id)
         {
             var korisnik = _repo.GetKorisnikById(id);
@@ -33,7 +33,8 @@ namespace WhereTo.Controllers
             return NotFound();
         }
 
-        [HttpGet("", Name="GetAllKorisnici")]
+        [Route("GetAllKorisnici")]
+        [HttpGet]//("", Name="GetAllKorisnici")]
         public ActionResult<Korisnik> GetAllKorisnici()
         {
             var korisnici= _repo.GetAllKorisnici();
@@ -45,6 +46,7 @@ namespace WhereTo.Controllers
             return NotFound();
         }
 
+        [Route("CreateKorisnik")]
         [HttpPost]
         public ActionResult<Korisnik> CreateKorisnik(Korisnik korisnik)
         {
@@ -65,7 +67,8 @@ namespace WhereTo.Controllers
         }
         
 
-        [HttpDelete("id/{id}", Name ="DeleteKorisnik")]
+        [Route("DeleteKorisnik/{id}")]
+        [HttpDelete]//("id/{id}", Name ="DeleteKorisnik")]
         public ActionResult<Korisnik>? DeleteKorisnik(string id)
         {
             if (!string.IsNullOrEmpty(id))
@@ -80,7 +83,8 @@ namespace WhereTo.Controllers
             return BadRequest("Invalid ID!");
         }
 
-        [HttpGet("Prijava/{mail}/{password}", Name = "PrijavaNaSajt")]
+        [Route("PrijavaKorisnika/{mail}/{password}")]
+        [HttpGet]//("Prijava/{mail}/{password}", Name = "PrijavaNaSajt")]
         public ActionResult<Korisnik> PrijavaNaSajt(string mail,string password)
         {
             var korisnici = _repo.GetAllKorisnici();
@@ -98,7 +102,9 @@ namespace WhereTo.Controllers
             }
             return NotFound();
         }
-        [HttpPut(Name="ChangeKorisnik")]
+
+        [Route("ChangeKorisnik")]
+        [HttpPut]//(Name="ChangeKorisnik")]
         public ActionResult<Korisnik>? ChangeKorisnik(Korisnik korisnik)
         {
             var korisnici = _repo.GetAllKorisnici();
@@ -119,7 +125,9 @@ namespace WhereTo.Controllers
             
             return Ok(korisnik);     
         }
-        [HttpPut("PrijavaNaDogadjaj",Name ="PrijaviSeNaDogadjaj")]
+
+        [Route("PrijavaNaDogadjaj")]
+        [HttpPut]//("PrijavaNaDogadjaj",Name ="PrijaviSeNaDogadjaj")]
         public ActionResult<Korisnik> PrijaviSeNaDogadjaj(string idd,string idk)
         {
             var dogadjaj=_dogrepo.GetDogadjajById(idd);

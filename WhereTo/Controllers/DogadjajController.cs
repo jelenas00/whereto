@@ -19,8 +19,8 @@ namespace WhereTo.Controllers
             _lokrepo=lokrepo;
         }
 
-
-        [HttpGet("id/{id}", Name ="GetDogadjajById")]
+        [Route("GetDogadjajById/{id}")]
+        [HttpGet]//("id/{id}", Name ="GetDogadjajById")]
         public ActionResult<Dogadjaj> GetDogadjajById(string id)
         {
             var dogadjaj= _repo.GetDogadjajById(id);
@@ -32,11 +32,15 @@ namespace WhereTo.Controllers
 
             return NotFound();
         }
-        [HttpGet("tag/{tag}", Name ="GetAllDogadjajByTag")]
+
+        [Route("GetAllDogadjajByTag/{tag}")]
+        [HttpGet]//("tag/{tag}", Name ="GetAllDogadjajByTag")]
         public ActionResult<IEnumerable<Dogadjaj>> GetAllDogadjajByTag(string tag)
         {
             return Ok(_repo.GetAllDogadjaji(tag));
         }
+
+        [Route("DodajTagDogadjaju/{dogid}/{tag}")]
         [HttpPut]
         public ActionResult<Dogadjaj> DodajTagDogadjaju(string idDogadjaja,string Tag)
         {
@@ -68,7 +72,9 @@ namespace WhereTo.Controllers
 
             return NotFound();
         }
-       [HttpDelete("id/{id}", Name ="DeleteDogadjaj")]
+
+        [Route("DeleteDogadjaj/{id}")]
+       [HttpDelete]//("id/{id}", Name ="DeleteDogadjaj")]
         public ActionResult<Dogadjaj> DeleteDogadjaj(string id)
         {
             var dogadjaj=_repo.GetDogadjajById(id);
@@ -88,7 +94,8 @@ namespace WhereTo.Controllers
             }
             return Ok(dogadjaj);
         }
-        [HttpDelete("date/{date}", Name ="DeleteDogadjajByDate")]
+        [Route("DeleteDogadjajByDate/{date}")]
+        [HttpDelete]//("date/{date}", Name ="DeleteDogadjajByDate")]
         public ActionResult<Dogadjaj>? DeleteDogadjajByDate(string date)
         {
             DateTime vreme=DateTime.Parse(date);
@@ -115,6 +122,8 @@ namespace WhereTo.Controllers
             }
             return null;
         }
+
+        [Route("CreateDogadjaj")]
         [HttpPost]
         public ActionResult<Dogadjaj> CreateDogadjaj(Dogadjaj dogadjaj)
         {
@@ -131,7 +140,9 @@ namespace WhereTo.Controllers
             //return CreatedAtRoute(nameof(GetDogadjajById), new {Id=dogadjaj.DogadjajID},dogadjaj);
             return Ok(dogadjaj);
         }
-        [HttpPut("dodajDogadjajLokalu",Name="DodajDogadjajLokalu")]
+
+        [Route("DodajDogadjajLokalu")]
+        [HttpPut]//("dodajDogadjajLokalu",Name="DodajDogadjajLokalu")]
         public ActionResult<Dogadjaj> DodajDogadjajLokalu(string idDogadjaja,string idlokala)
         {
             var dogadjaj= _repo.GetDogadjajById(idDogadjaja);
@@ -151,6 +162,8 @@ namespace WhereTo.Controllers
             }
             return NotFound();
         }
+
+        
         [HttpGet("ObavestiKorisnike/{id}/{poruka}", Name ="ObavestiKorisnike")]
         public ActionResult<IEnumerable<Dogadjaj>> ObavestiKorisnike(string id,string poruka)
         {
