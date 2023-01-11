@@ -16,7 +16,7 @@ namespace WhereTo.Models
 
         [Required]
         public string Password { get; set; }=String.Empty;
+        public List<string>? inbox { get; set; }
         
-        public List<Dogadjaj>? Dogadjaji { get; set; }
     }
 }

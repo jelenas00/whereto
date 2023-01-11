@@ -76,6 +76,7 @@ namespace WhereTo.DataLayer
                     novi.LastName=korisnik.LastName;
                     novi.Email=korisnik.Email;
                     novi.Password=korisnik.Password;
+                    novi.inbox=korisnik.inbox;
                     var upis= JsonSerializer.Serialize(novi);
                     db.HashSet("korisnikHes",new HashEntry[]{new HashEntry(novi.KorisnikID,upis)});
                     return novi;

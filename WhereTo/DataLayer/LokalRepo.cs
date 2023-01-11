@@ -18,32 +18,20 @@ namespace WhereTo.DataLayer
             var db= _redis.GetDatabase();
             if(lok!=null)
             {
-                //var stari= db.HashGet("korisnikHes",korisnik.KorisnikID);
+                
                 Lokal? novi= JsonSerializer.Deserialize<Lokal>(db.HashGet("lokalihes",lok.LokalID));
-                //if(!stari.IsNullOrEmpty)
                 if(novi!=null)
                 {
-                    //Korisnik novi= JsonSerializer.Deserialize<Korisnik>(stari);
                     novi.Name=lok.Name;
                     novi.Opis=lok.Opis;
                     novi.RadnoVreme=lok.RadnoVreme;
                     novi.Lokacija=lok.Lokacija;
-                    /*if(lok.Tagovi!=null)
-                    {
-                        foreach(string el in lok.Tagovi)
-                            novi.Tagovi.Add(el);
-                    }
-                    else novi.Tagovi=null;
-                    if(lok.Dogadjaji!=null)
-                    {
-                        foreach(Dogadjaj el in lok.Dogadjaji)
-                            novi.Dogadjaji.Add(el);
-                    }
-                    else
-                        novi.Dogadjaji=null;*/
                     novi.Tagovi=lok.Tagovi;
                     novi.Dogadjaji=lok.Dogadjaji;
                     var upis= JsonSerializer.Serialize(novi);
+                    if(novi.Tagovi!=null)
+                        foreach(var tag in novi.Tagovi)
+                            db.HashSet(tag,new HashEntry[]{new HashEntry(novi.LokalID,upis)});
                     db.HashSet("lokalihes",new HashEntry[]{new HashEntry(novi.LokalID,upis)});
                     return novi;
                 }
@@ -64,7 +52,6 @@ namespace WhereTo.DataLayer
                         db.HashSet(el, new HashEntry[]{new HashEntry(lok.LokalID,serialLok)});
                 }
                 db.HashSet("lokalihes", new HashEntry[]{new HashEntry(lok.LokalID,serialLok)});
-                //db.StringSet(lok.LokalID,serialLok);
             }
         }
 
@@ -73,6 +60,12 @@ namespace WhereTo.DataLayer
             var db=_redis.GetDatabase();
             if(!string.IsNullOrEmpty(id))
             {
+                var lok=GetLokalById(id);
+                if(lok!=null)
+                    if(lok.Tagovi!=null)
+                        foreach(string el in lok.Tagovi)
+                            db.HashDelete(el,lok.LokalID);
+                
                 db.HashDelete("lokalihes",id);
             }
         }
@@ -106,7 +99,14 @@ namespace WhereTo.DataLayer
 
         public IEnumerable<Lokal?>? GetLokaliByTag(string tag)
         {
-            throw new NotImplementedException();
+            var db= _redis.GetDatabase();
+            var lokali= db.HashGetAll(tag);
+            if(lokali!=null)
+            {
+                var lista= Array.ConvertAll(lokali, val=>JsonSerializer.Deserialize<Lokal>(val.Value)).ToList();
+                return lista;
+            }
+            return null;
         }
 
     }

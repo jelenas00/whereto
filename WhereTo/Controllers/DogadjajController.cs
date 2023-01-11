@@ -9,10 +9,14 @@ namespace WhereTo.Controllers
     public class DogadjajController:ControllerBase
     {
         private IDogadjajRepo _repo;
+        private IKorisnikRepo _korrepo;
+        private ILokalRepo _lokrepo;
 
-        public DogadjajController(IDogadjajRepo repo)
+        public DogadjajController(IDogadjajRepo repo,IKorisnikRepo korrepo,ILokalRepo lokrepo)
         {
             _repo=repo;
+            _korrepo=korrepo;
+            _lokrepo=lokrepo;
         }
 
 
@@ -47,6 +51,15 @@ namespace WhereTo.Controllers
                             ponavljanjeTaga++;
                     if(ponavljanjeTaga==0)
                         dogadjaj.listaTagova.Add(Tag);
+                    if(dogadjaj.Organizator!=null)
+                        {
+                            if(dogadjaj.Organizator.Dogadjaji!=null)
+                            {
+                                dogadjaj.Organizator.Dogadjaji.Remove(dogadjaj.Organizator.Dogadjaji.Where(p=>p?.DogadjajID==dogadjaj.DogadjajID).First());
+                                dogadjaj.Organizator.Dogadjaji.Add(dogadjaj);
+                            }
+                          _lokrepo.ChangeLokal(dogadjaj.Organizator);
+                        }  
                     _repo.CreateDogadjaj(dogadjaj);
 
                 return Ok(dogadjaj);
@@ -61,10 +74,16 @@ namespace WhereTo.Controllers
             var dogadjaj=_repo.GetDogadjajById(id);
             if(dogadjaj!=null)
             {
+                if(dogadjaj.Organizator!=null)
+                    if(dogadjaj.Organizator.Dogadjaji!=null)
+                    {
+                        dogadjaj.Organizator.Dogadjaji.Remove(dogadjaj.Organizator.Dogadjaji.Where(p=>p?.DogadjajID==dogadjaj.DogadjajID).First());
+                        _lokrepo.ChangeLokal(dogadjaj.Organizator);
+                        //ne izbacuje iz liste sredi sutra
+                    }
                 if(dogadjaj.listaTagova!=null)
                 {
-                    _repo.DeleteDogadjaj(dogadjaj);
-                
+                    _repo.DeleteDogadjaj(dogadjaj); 
                 }
             }
             return Ok(dogadjaj);
@@ -79,12 +98,20 @@ namespace WhereTo.Controllers
                 if(dogadjaji!=null)
                 {
                     foreach(var dog in dogadjaji)
-                        {   
-                            if(dog!=null)
-                                _repo.DeleteDogadjaj(dog);
+                    {   
+                        if(dog!=null)
+                        {     
+                            if(dog.Organizator!=null)
+                                if(dog.Organizator.Dogadjaji!=null)
+                                {
+                                    dog.Organizator.Dogadjaji.Remove(dog.Organizator.Dogadjaji.Where(p=>p?.DogadjajID==dog.DogadjajID).First());
+                                    _lokrepo.ChangeLokal(dog.Organizator);
+                                }
+                                _repo.DeleteDogadjaj(dog);                     
                         }
-                }
-                return Ok(dogadjaji);
+                    }
+                    return Ok(dogadjaji);
+                }      
             }
             return null;
         }
@@ -103,6 +130,45 @@ namespace WhereTo.Controllers
             }
             //return CreatedAtRoute(nameof(GetDogadjajById), new {Id=dogadjaj.DogadjajID},dogadjaj);
             return Ok(dogadjaj);
+        }
+        [HttpPut("dodajDogadjajLokalu",Name="DodajDogadjajLokalu")]
+        public ActionResult<Dogadjaj> DodajDogadjajLokalu(string idDogadjaja,string idlokala)
+        {
+            var dogadjaj= _repo.GetDogadjajById(idDogadjaja);
+            if(dogadjaj!=null)
+            {
+                var lokal=_lokrepo.GetLokalById(idlokala);
+                if(lokal!=null)
+                {
+                    if(lokal.Dogadjaji!=null)
+                        lokal.Dogadjaji.Add(dogadjaj);
+                    if(dogadjaj.Organizator==null)
+                        dogadjaj.Organizator=lokal;
+                    _lokrepo.ChangeLokal(lokal);  
+                }  
+                _repo.CreateDogadjaj(dogadjaj);
+                return Ok(dogadjaj);     
+            }
+            return NotFound();
+        }
+        [HttpGet("ObavestiKorisnike/{id}/{poruka}", Name ="ObavestiKorisnike")]
+        public ActionResult<IEnumerable<Dogadjaj>> ObavestiKorisnike(string id,string poruka)
+        {
+            var dogadjaj=_repo.GetDogadjajById(id);
+            if(dogadjaj!=null)
+            {
+                if(dogadjaj.Korisnici!=null)
+                {
+                    foreach(var kor in dogadjaj.Korisnici)
+                    {
+                        if(kor.inbox!=null)
+                            kor.inbox.Add(poruka);
+                        _korrepo.ChangeKorisnik(kor);
+                    }
+                }
+            return Ok("Korisnici su obavesteni");
+            }
+            return BadRequest("Greska u slanju poruke");
         }
 
         
