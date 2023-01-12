@@ -56,6 +56,7 @@ namespace WhereTo.Controllers
             }
             return NotFound();
         }
+        
         [HttpGet("VratiPoTagu/{tag}", Name="VratiLokalePoTagu")]
         public ActionResult<Lokal> VratiLokalePoTagu(string tag)
         {   
@@ -79,8 +80,9 @@ namespace WhereTo.Controllers
                     {
                         foreach(var dog in lokal.Dogadjaji)
                         {
-                            if(dog!=null)
-                               _dogrepo.DeleteDogadjaj(dog); 
+                            var doga=_dogrepo.GetDogadjajById(dog);
+                            if(doga!=null)
+                               _dogrepo.DeleteDogadjaj(doga); 
                             
                         }
                     }
@@ -101,10 +103,11 @@ namespace WhereTo.Controllers
                     {
                         foreach(var dog in lokal.Dogadjaji)
                         {
-                            if(dog!=null)
+                            var doga=_dogrepo.GetDogadjajById(dog);
+                            if(doga!=null)
                             {
-                                dog.Organizator=lok;
-                               _dogrepo.CreateDogadjaj(dog); 
+                                doga.Organizator=lok;
+                               _dogrepo.CreateDogadjaj(doga); 
                             }
                             
                         }

@@ -39,6 +39,24 @@ namespace WhereTo.Controllers
         {
             return Ok(_repo.GetAllDogadjaji(tag));
         }
+        [Route("GetDogadjajeLokala/{id}")]
+        [HttpGet]//("tag/{tag}", Name ="GetAllDogadjajByTag")]
+        public ActionResult<IEnumerable<Dogadjaj>> GetDogadjajeLokala(string id)
+        {
+            var listaDogadjaja=new List<Dogadjaj>();
+            var lok=_lokrepo.GetLokalById(id);
+            if(lok!=null)
+            {
+                if(lok.Dogadjaji!=null)
+                    foreach(var dog in lok.Dogadjaji)
+                    {
+                        var doga=_repo.GetDogadjajById(dog);
+                        if(doga!=null)
+                            listaDogadjaja.Add(doga);
+                    }
+            }
+            return Ok(listaDogadjaja);
+        }
 
         [Route("DodajTagDogadjaju/{dogid}/{tag}")]
         [HttpPut]
@@ -54,16 +72,7 @@ namespace WhereTo.Controllers
                         if(String.Equals(el,Tag)==true)
                             ponavljanjeTaga++;
                     if(ponavljanjeTaga==0)
-                        dogadjaj.listaTagova.Add(Tag);
-                    if(dogadjaj.Organizator!=null)
-                        {
-                            if(dogadjaj.Organizator.Dogadjaji!=null)
-                            {
-                                dogadjaj.Organizator.Dogadjaji.Remove(dogadjaj.Organizator.Dogadjaji.Where(p=>p?.DogadjajID==dogadjaj.DogadjajID).First());
-                                dogadjaj.Organizator.Dogadjaji.Add(dogadjaj);
-                            }
-                          _lokrepo.ChangeLokal(dogadjaj.Organizator);
-                        }  
+                        dogadjaj.listaTagova.Add(Tag);                 
                     _repo.CreateDogadjaj(dogadjaj);
 
                 return Ok(dogadjaj);
@@ -83,9 +92,9 @@ namespace WhereTo.Controllers
                 if(dogadjaj.Organizator!=null)
                     if(dogadjaj.Organizator.Dogadjaji!=null)
                     {
-                        dogadjaj.Organizator.Dogadjaji.Remove(dogadjaj.Organizator.Dogadjaji.Where(p=>p?.DogadjajID==dogadjaj.DogadjajID).First());
+                        dogadjaj.Organizator.Dogadjaji.Remove(dogadjaj.DogadjajID);
                         _lokrepo.ChangeLokal(dogadjaj.Organizator);
-                        //ne izbacuje iz liste sredi sutra
+                        
                     }
                 if(dogadjaj.listaTagova!=null)
                 {
@@ -111,7 +120,7 @@ namespace WhereTo.Controllers
                             if(dog.Organizator!=null)
                                 if(dog.Organizator.Dogadjaji!=null)
                                 {
-                                    dog.Organizator.Dogadjaji.Remove(dog.Organizator.Dogadjaji.Where(p=>p?.DogadjajID==dog.DogadjajID).First());
+                                    dog.Organizator.Dogadjaji.Remove(dog.DogadjajID);
                                     _lokrepo.ChangeLokal(dog.Organizator);
                                 }
                                 _repo.DeleteDogadjaj(dog);                     
@@ -152,7 +161,7 @@ namespace WhereTo.Controllers
                 if(lokal!=null)
                 {
                     if(lokal.Dogadjaji!=null)
-                        lokal.Dogadjaji.Add(dogadjaj);
+                        lokal.Dogadjaji.Add(dogadjaj.DogadjajID);
                     if(dogadjaj.Organizator==null)
                         dogadjaj.Organizator=lokal;
                     _lokrepo.ChangeLokal(lokal);  
@@ -174,9 +183,14 @@ namespace WhereTo.Controllers
                 {
                     foreach(var kor in dogadjaj.Korisnici)
                     {
-                        if(kor.inbox!=null)
-                            kor.inbox.Add(poruka);
-                        _korrepo.ChangeKorisnik(kor);
+                        var kori=_korrepo.GetKorisnikById(kor.KorisnikID);
+                        if(kori!=null)
+                        {
+                            if(kor.inbox!=null)
+                                kor.inbox.Add(poruka);
+                            _repo.CreateDogadjaj(dogadjaj);
+                            _korrepo.ChangeKorisnik(kor);
+                        }
                     }
                 }
             return Ok("Korisnici su obavesteni");

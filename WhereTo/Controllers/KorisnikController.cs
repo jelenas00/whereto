@@ -141,17 +141,7 @@ namespace WhereTo.Controllers
                     {
                         dogadjaj.Korisnici=new List<Korisnik>();
                     }
-                    dogadjaj.Korisnici.Add(korisnik);
-                    if(dogadjaj.Organizator!=null)
-                    {
-                        if(dogadjaj.Organizator.Dogadjaji!=null)
-                        {
-                            dogadjaj.Organizator.Dogadjaji.Remove(dogadjaj.Organizator.Dogadjaji.Where(p=>p?.DogadjajID==dogadjaj.DogadjajID).First());
-                            dogadjaj.Organizator.Dogadjaji.Add(dogadjaj);
-                            _lokrepo.ChangeLokal(dogadjaj.Organizator);
-                        }
-                       
-                    }
+                    dogadjaj.Korisnici.Add(korisnik);         
                     _repo.ChangeKorisnik(korisnik);
                     _dogrepo.CreateDogadjaj(dogadjaj);
                     return Ok(korisnik);
@@ -159,6 +149,24 @@ namespace WhereTo.Controllers
                 return BadRequest("losa prijava na dogadjaj");
             }
             return Ok("losa prijava na dogadjaj");
+        }
+        [Route("IsprazniInbox/{id}")]
+        [HttpPut]
+        public ActionResult<Korisnik> isprazniInbox(string id)
+        {
+            var korisnik=_repo.GetKorisnikById(id);
+
+           if(korisnik!=null)
+           {
+                if(korisnik.inbox!=null)
+                {
+                    foreach(var por in korisnik.inbox)
+                        korisnik.inbox.Remove(por);
+                }
+                _repo.ChangeKorisnik(korisnik);
+           }
+           
+           return Ok(korisnik);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WhereTo.Models
 {
@@ -10,6 +11,7 @@ namespace WhereTo.Models
         public string Name { get; set; }=String.Empty;
 
         public Lokal? Organizator { get; set; }
+
         public List<Korisnik>? Korisnici { get; set; }
         public string? Datum { get; set; }
 
