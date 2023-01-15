@@ -1506,19 +1506,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bojan\\.nuget\\packages\\": {}
+    "C:\\Users\\Jelena\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bojan\\Documents\\GitHub\\whereto\\WhereTo\\WhereTo.csproj",
+      "projectUniqueName": "C:\\Users\\Jelena\\Desktop\\WhereTo\\whereto\\WhereTo\\WhereTo.csproj",
       "projectName": "WhereTo",
-      "projectPath": "C:\\Users\\bojan\\Documents\\GitHub\\whereto\\WhereTo\\WhereTo.csproj",
-      "packagesPath": "C:\\Users\\bojan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bojan\\Documents\\GitHub\\whereto\\WhereTo\\obj\\",
+      "projectPath": "C:\\Users\\Jelena\\Desktop\\WhereTo\\whereto\\WhereTo\\WhereTo.csproj",
+      "packagesPath": "C:\\Users\\Jelena\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jelena\\Desktop\\WhereTo\\whereto\\WhereTo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\bojan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jelena\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1576,7 +1576,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

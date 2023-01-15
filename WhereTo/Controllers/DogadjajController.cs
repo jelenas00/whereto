@@ -144,8 +144,12 @@ namespace WhereTo.Controllers
                             ponavljanjeTaga++;
                 if(ponavljanjeTaga==0)
                     dogadjaj.listaTagova.Add("Dogadjaj");
-                _repo.CreateDogadjaj(dogadjaj);
             }
+            else
+            {
+                dogadjaj.listaTagova?.Add("Dogadjaj");
+            }
+             _repo.CreateDogadjaj(dogadjaj);
             //return CreatedAtRoute(nameof(GetDogadjajById), new {Id=dogadjaj.DogadjajID},dogadjaj);
             return Ok(dogadjaj);
         }

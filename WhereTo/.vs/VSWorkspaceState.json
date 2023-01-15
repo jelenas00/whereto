@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Client",
     "\\Controllers"
   ],
-  "SelectedNode": "\\appsettings.json",
+  "SelectedNode": "\\Client\\proba.js",
   "PreviewInSolutionExplorer": false
 }

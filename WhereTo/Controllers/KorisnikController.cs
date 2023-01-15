@@ -57,8 +57,8 @@ namespace WhereTo.Controllers
                     {
                         if(kor!=null)
                         {
-                            if(String.Equals(kor.Email,korisnik.Email)==true&&String.Equals(kor.Password,korisnik.Password)==true)
-                                return BadRequest("Postoji korisnik sa tim mejlom ili pasvordom");
+                            if(String.Equals(kor.Email,korisnik.Email)==true)
+                                return BadRequest("Postoji korisnik sa tim mejlo");
                         }
                     }     
             }     

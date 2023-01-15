@@ -32,6 +32,18 @@ namespace WhereTo.Controllers
         [HttpPost]
         public ActionResult<Lokal> CreateLokal(Lokal lok)
         {
+            var lokali = _repo.GetAllLokali();
+            if (lokali != null)
+            {
+                foreach(var l in lokali)
+                    {
+                        if(l!=null)
+                        {
+                            if(String.Equals(l.Email,lok.Email)==true)
+                                return BadRequest("U sistemu vec postoji registovan lokal sa tom email adresom!");
+                        }
+                    }     
+            }
             if(lok.Tagovi!=null)
             {
                 int ponavljanjeTaga=0;
@@ -40,8 +52,12 @@ namespace WhereTo.Controllers
                             ponavljanjeTaga++;
                 if(ponavljanjeTaga==0)
                     lok.Tagovi.Add("Lokal");
-                _repo.CreateLokal(lok);
             }
+            if(lok.Tagovi==null)
+            {
+                lok.Tagovi?.Add("Lokal");
+            }
+            _repo.CreateLokal(lok);
             return Ok(lok);
         }
 
@@ -94,7 +110,7 @@ namespace WhereTo.Controllers
         }
         [Route("ChangeLokal")]
         [HttpPut]//(Name="ChangeLokal")]
-        public ActionResult<Lokal>? ChangeKorisnik(Lokal lok)
+        public ActionResult<Lokal>? ChangeLokal(Lokal lok)
         {
             var lokal=_repo.GetLokalById(lok.LokalID);
                 if(lokal!=null)
@@ -114,7 +130,28 @@ namespace WhereTo.Controllers
                     }
                 }
             _repo.ChangeLokal(lok);
-            return CreatedAtRoute(nameof(GetLokalById), new {Id=lok.LokalID},lok);
+            return Ok(lok);
+            //return CreatedAtRoute(nameof(GetLokalById), new {Id=lok.LokalID},lok);
+        }
+
+        [Route("PrijavaVlasnika/{mail}/{password}")]
+        [HttpGet]
+        public ActionResult<Lokal> PrijavaVlasnika(string mail,string password)
+        {
+            var lokali = _repo.GetAllLokali();
+
+            if (lokali != null)
+            {
+                foreach(var lokal in lokali)
+                    {
+                        if(lokal!=null)
+                        {
+                            if(String.Equals(lokal.Email,mail)==true&&String.Equals(lokal.Password,password)==true)
+                                return Ok(lokal);
+                        }
+                    }     
+            }
+            return NotFound();
         }
     }
 }

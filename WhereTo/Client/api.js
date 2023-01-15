@@ -227,6 +227,61 @@ export class Api
         }
     }
 
+    async getLokalPrijava(email,password)
+    {
+        let list=[]
+        let response= await fetch("http://localhost:5089/api/Lokal/PrijavaVlasnika/"+email+"/"+password, 
+        {
+            method:"GET"
+        });
+        switch(response.status)
+        {
+            case 200:
+                {
+                    var el= await response.json();
+                    const korisnik= new Lokal(el.lokalID,el.name,el.lokacija,el.vlasnik,el.radnoVreme,el.opis,el.dogadjaji,el.tagovi);
+                    return korisnik;
+                }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+
+    async getLokalByTag(tag)
+    {
+        let list=[]
+        let response= await fetch("http://localhost:5089/api/Lokal/VratiPoTagu/"+tag, 
+        {
+            method:"GET"
+        });
+        switch(response.status)
+        {
+            case 200:
+                {
+                    var data= await response.json();
+                    data.forEach(el => {
+                        const korisnik= new Lokal(el.lokalID,el.name,el.lokacija,el.vlasnik,el.radnoVreme,el.opis,el.dogadjaji,el.tagovi);
+                        list.push(korisnik);
+                    });
+                    return list;
+                }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+
     async getDogadjajByTag(tag)
     {
         let list=[]
@@ -291,6 +346,149 @@ export class Api
 
     //POST/////////////////////////////////////////////
 
+    async dodajLokal(lokal){
 
+        let response = await fetch("http://localhost:5089/api/Lokal/CreateLokal",
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"POST",
+            body: JSON.stringify(lokal,["name","lokacija","vlasnik","radnoVreme","opis","dogadjaji","tagovi","email","password"])
+        });
+
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+    
+    
+    async dodajKorisnika(korisnik){
+
+        let response = await fetch("http://localhost:5089/api/Korisnik/CreateKorisnik",
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"POST",
+            body: JSON.stringify(korisnik,["name","lastName","email","password","inbox"])
+        });
+
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    } 
+
+    async dodajDogadjaj(dogadjaj){
+
+        let response = await fetch("http://localhost:5089/api/Dogadjaj/CreateDogadjaj",
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"POST",
+            body: JSON.stringify(dogadjaj,[ "name","organizator","korisnici","datum","listaTagova"])
+        });
+
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
     //PUT//////////////////////////////////////////////
+    async izmeniLokal(lokal){
+
+        let response = await fetch("http://localhost:5089/api/Lokal/ChangeLokal",
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT",
+            body: JSON.stringify(lokal)
+        });
+
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+
+    async izmeniKorisnika(korisnik){
+
+        let response = await fetch("http://localhost:5089/api/Lokal/ChangeLokal",
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT",
+            body: JSON.stringify(korisnik)
+        });
+
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
 }

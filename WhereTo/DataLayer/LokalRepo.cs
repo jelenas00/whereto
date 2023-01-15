@@ -28,6 +28,8 @@ namespace WhereTo.DataLayer
                     novi.Lokacija=lok.Lokacija;
                     novi.Tagovi=lok.Tagovi;
                     novi.Dogadjaji=lok.Dogadjaji;
+                    novi.Email=lok.Email;
+                    novi.Password=lok.Password;
                     var upis= JsonSerializer.Serialize(novi);
                     if(novi.Tagovi!=null)
                         foreach(var tag in novi.Tagovi)
@@ -52,6 +54,9 @@ namespace WhereTo.DataLayer
                         db.HashSet(el, new HashEntry[]{new HashEntry(lok.LokalID,serialLok)});
                 }
                 db.HashSet("lokalihes", new HashEntry[]{new HashEntry(lok.LokalID,serialLok)});
+            }
+            else{
+                throw new ArgumentOutOfRangeException(nameof(lok));
             }
         }
 
