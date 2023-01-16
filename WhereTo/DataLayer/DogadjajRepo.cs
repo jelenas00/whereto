@@ -34,7 +34,7 @@ namespace WhereTo.DataLayer
                             db.HashSet(tag,new HashEntry[]{new HashEntry(izmena.DogadjajID,upis)});
                         }
                     }
-                    db.HashSet("lokalihes",new HashEntry[]{new HashEntry(izmena.DogadjajID,upis)});
+                    db.HashSet(izmena.Datum,new HashEntry[]{new HashEntry(izmena.DogadjajID,upis)});
                     return izmena;
                 }
                 else return null;

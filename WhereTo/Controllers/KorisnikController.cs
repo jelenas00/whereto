@@ -139,7 +139,7 @@ namespace WhereTo.Controllers
             return NotFound();     
         }
 
-        [Route("PrijavaNaDogadjaj")]
+        [Route("PrijavaNaDogadjaj/{idd}/{idk}")]
         [HttpPut]//("PrijavaNaDogadjaj",Name ="PrijaviSeNaDogadjaj")]
         public ActionResult<Korisnik> PrijaviSeNaDogadjaj(string idd,string idk)
         {

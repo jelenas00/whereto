@@ -92,6 +92,38 @@ export class Api
         }
     }
     //GET//////////////////////////////////////////////
+    async getLokaleDogadjaja(id)
+    {
+        let list=[]
+        let response= await fetch("http://localhost:5089/api/Dogadjaj/GetDogadjajeLokala/"+id, 
+        {
+            method:"GET"
+        });
+        switch(response.status)
+        {
+            case 200:
+                {
+                    var data= await response.json();
+                    data.forEach(el=>{
+                        const dog= new Dogadjaj(el.dogadjajID, el.name,el.organizator,el.korisnici,el.datum,el.listaTagova);
+                        list.push(dog)
+                    });
+                    return list;
+                }
+            case 204:
+                {
+                    return "Sve ok";
+                }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
     async getLokali()
     {
         let list=[]
@@ -120,7 +152,28 @@ export class Api
             }
         }
     }
-
+    async obavestiKorisnike(id,poruka)
+    {
+        let response= await fetch("http://localhost:5089/api/Dogadjaj/ObavestiKorisnike/"+id+"/"+poruka, 
+        {
+            method:"GET"
+        });
+        switch(response.status)
+        {
+            case 200:
+                {
+                    console.log(`Klijenti su obavesteni  ${await response.text()}`)
+                }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
     async getLokalById(id)
     {
         let list=[]
@@ -547,7 +600,18 @@ export class Api
             }
         }
     }
-
+    async prijavaNaDogadjaj(idd,idk)
+    {
+        let response = await fetch("http://localhost:5089/api/Korisnik/PrijavaNaDogadjaj/"+idd+"/"+idk,
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT"
+        });
+    }
     async izmeniKorisnikaLogInfo(korisnik,mail,pass){
 
         let response = await fetch("http://localhost:5089/api/Korisnik/ChangeKorisnikLogInfo/"+korisnik+"/"+mail+"/"+pass,

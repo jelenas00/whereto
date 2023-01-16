@@ -157,13 +157,58 @@ namespace WhereTo.Controllers
                             ponavljanjeTaga++;
                 if(ponavljanjeTaga==0)
                     dogadjaj.listaTagova.Add("Dogadjaj");
+                if(dogadjaj.Organizator!=null)
+                {
+                    var lokal=_lokrepo.GetLokalById(dogadjaj.Organizator.LokalID);
+                    if(lokal!=null)
+                    {
+                        if(lokal.Dogadjaji!=null)
+                        {
+                            lokal.Dogadjaji.Add(dogadjaj.DogadjajID);
+                            foreach(var dogID in lokal.Dogadjaji)
+                                    {
+                                        var dog=_repo.GetDogadjajById(dogID);
+                                        if(dog!=null)
+                                        {
+                                        dog.Organizator=lokal;
+                                        _repo.ChangeDogadjaj(dog);
+                                        }
+                                    }
+                        }
+                        dogadjaj.Organizator=lokal;
+                        _lokrepo.ChangeLokal(lokal);  
+                    }
+                }
                 resp=_repo.CreateDogadjaj(dogadjaj);
             }
             else
             {
+                 if(dogadjaj.Organizator!=null)
+                {
+                    var lokal=_lokrepo.GetLokalById(dogadjaj.Organizator.LokalID);
+                    if(lokal!=null)
+                    {
+                        if(lokal.Dogadjaji!=null)
+                        {
+                            lokal.Dogadjaji.Add(dogadjaj.DogadjajID);
+                            foreach(var dogID in lokal.Dogadjaji)
+                                    {
+                                        var dog=_repo.GetDogadjajById(dogID);
+                                        if(dog!=null)
+                                        {
+                                        dog.Organizator=lokal;
+                                        _repo.ChangeDogadjaj(dog);
+                                        }
+                                    }
+                        }
+                        dogadjaj.Organizator=lokal;
+                        _lokrepo.ChangeLokal(lokal);  
+                    }
+                }
                 dogadjaj.listaTagova?.Add("Dogadjaj");
                 resp=_repo.CreateDogadjaj(dogadjaj);
             }
+            
             if(resp!=null)
                 return Ok(resp);
             else 
