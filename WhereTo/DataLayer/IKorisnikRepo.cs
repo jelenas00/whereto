@@ -10,6 +10,7 @@ namespace WhereTo.DataLayer
         void DeleteKorisnik (string id);
 
         Korisnik? ChangeKorisnik(Korisnik korisnik);
+        Korisnik? ChangeKorisnikLogInfo(string id,string mail,string pass);
         
     }
 }

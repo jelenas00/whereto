@@ -105,7 +105,7 @@ export class Api
                 {
                     var data= await response.json();
                     data.forEach(element => {
-                        const lokal= new Lokal(element.lokalID,element.name,element.lokacija,element.vlasnik,element.radnoVreme,element.opis,element.dogadjaji,element.tagovi);
+                        const lokal= new Lokal(element.lokalID,element.name,element.lokacija,element.vlasnik,element.radnoVreme,element.opis,element.dogadjaji,element.tagovi,element.email,element.password);
                         list.push(lokal);
                     });
                     return list;
@@ -133,7 +133,7 @@ export class Api
             case 200:
                 {
                     var element= await response.json();
-                    const lokal= new Lokal(element.lokalID,element.name,element.lokacija,element.vlasnik,element.radnoVreme,element.opis,element.dogadjaji,element.tagovi);
+                    const lokal= new Lokal(element.lokalID,element.name,element.lokacija,element.vlasnik,element.radnoVreme,element.opis,element.dogadjaji,element.tagovi,element.email,element.password);
                     return lokal;
                 }
             case 400:{
@@ -266,7 +266,7 @@ export class Api
                 {
                     var data= await response.json();
                     data.forEach(el => {
-                        const korisnik= new Lokal(el.lokalID,el.name,el.lokacija,el.vlasnik,el.radnoVreme,el.opis,el.dogadjaji,el.tagovi);
+                        const korisnik= new Lokal(el.lokalID,el.name,el.lokacija,el.vlasnik,el.radnoVreme,el.opis,el.dogadjaji,el.tagovi,el.email,el.password);
                         list.push(korisnik);
                     });
                     return list;
@@ -434,6 +434,34 @@ export class Api
         }
     }
     //PUT//////////////////////////////////////////////
+    async dodajTagDogadjaju(dog,tag){
+
+        let response = await fetch("http://localhost:5089/api/Dogadjaj/DodajTagDogadjaju/"+dog+"/"+tag,
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT"
+        });
+
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+
     async izmeniLokal(lokal){
 
         let response = await fetch("http://localhost:5089/api/Lokal/ChangeLokal",
@@ -463,9 +491,37 @@ export class Api
         }
     }
 
+    async izmeniLokalLogInfo(lokal,mail,pass){
+
+        let response = await fetch("http://localhost:5089/api/Lokal/ChangeLokalLogInfo/"+lokal+"/"+mail+"/"+pass,
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT"
+        });
+
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+
     async izmeniKorisnika(korisnik){
 
-        let response = await fetch("http://localhost:5089/api/Lokal/ChangeLokal",
+        let response = await fetch("http://localhost:5089/api/Korisnik/ChangeKorisnik",
         {
             headers:
             {
@@ -474,6 +530,34 @@ export class Api
             },
             method:"PUT",
             body: JSON.stringify(korisnik)
+        });
+
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+
+    async izmeniKorisnikaLogInfo(korisnik,mail,pass){
+
+        let response = await fetch("http://localhost:5089/api/Korisnik/ChangeKorisnikLogInfo/"+korisnik+"/"+mail+"/"+pass,
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT"
         });
 
         switch(response.status){

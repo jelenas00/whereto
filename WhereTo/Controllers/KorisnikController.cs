@@ -107,23 +107,36 @@ namespace WhereTo.Controllers
         [HttpPut]//(Name="ChangeKorisnik")]
         public ActionResult<Korisnik>? ChangeKorisnik(Korisnik korisnik)
         {
+                var izmena=_repo.ChangeKorisnik(korisnik);
+                return Ok(izmena);          
+        }
+
+        [Route("ChangeKorisnikLogInfo/{id}/{mail}/{pass}")]
+        [HttpPut]//(Name="ChangeKorisnik")]
+        public ActionResult<Korisnik>? ChangeKorisnikLogInfo(string id,string mail,string pass)
+        {
             var korisnici = _repo.GetAllKorisnici();
-            if (korisnici != null)
+            var korisnik =_repo.GetKorisnikById(id);
+            if (korisnici != null&&korisnik!=null)
             {
-                foreach(var kor in korisnici)
-                {
-                    if(kor!=null)
+                if(String.Equals(korisnik.Email,mail)==false)
+                    foreach(var kor in korisnici)
                     {
-                        if(String.Equals(kor.Email,korisnik.Email)==true&&String.Equals(kor.Password,korisnik.Password)==true)
-                            return BadRequest("Postoji korisnik sa tim mejlom ili pasvordom");
+                        if(kor!=null)
+                        {
+                            if(String.Equals(kor.Email,korisnik.Email)==true)
+                                return BadRequest("Postoji korisnik sa tim mejlom");
+                        }
                     }
+                else{
+                    _repo.ChangeKorisnikLogInfo(id,mail,pass);
+                    return Ok("Izmena uspesna!");
                 }
-                
             }     
             
-            _repo.ChangeKorisnik(korisnik);
             
-            return Ok(korisnik);     
+            
+            return NotFound();     
         }
 
         [Route("PrijavaNaDogadjaj")]

@@ -112,9 +112,12 @@ namespace WhereTo.Controllers
         [HttpPut]//(Name="ChangeLokal")]
         public ActionResult<Lokal>? ChangeLokal(Lokal lok)
         {
-            var lokal=_repo.GetLokalById(lok.LokalID);
+            var zaIzmenu=_repo.GetLokalById(lok.LokalID);
+            if(zaIzmenu!=null)
+            {
+                _repo.ChangeLokal(lok);
+                var lokal = _repo.GetLokalById(lok.LokalID);
                 if(lokal!=null)
-                {
                     if(lokal.Dogadjaji!=null)
                     {
                         foreach(var dog in lokal.Dogadjaji)
@@ -123,14 +126,44 @@ namespace WhereTo.Controllers
                             if(doga!=null)
                             {
                                 doga.Organizator=lok;
-                               _dogrepo.CreateDogadjaj(doga); 
+                                _dogrepo.CreateDogadjaj(doga); 
                             }
                             
                         }
                     }
+                return Ok(lokal);
+            }
+            else
+                return BadRequest("Lokal nije nadjen");
+            //return CreatedAtRoute(nameof(GetLokalById), new {Id=lok.LokalID},lok);
+        }
+
+        [Route("ChangeLokalLogInfo/{id}/{mail}/{pass}")]
+        [HttpPut]//(Name="ChangeLokal")]
+        public ActionResult<Lokal>? ChangeLokalLogInfo(string id,string mail,string pass)
+        {
+                var lokali= _repo.GetAllLokali();
+                var lokal=_repo.GetLokalById(id);
+                if(lokal!=null&&lokali!=null)
+                {
+                    if(String.Equals(lokal.Email,mail)==false)
+                    {
+                        foreach(var l in lokali)
+                        {
+                            if(l!=null)
+                            {
+                                if(String.Equals(l.Email,mail)==true)
+                                    return BadRequest("Postoji lokal sa tim mejlom!");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        _repo.ChangeLokalLogInfo(id,mail,pass);
+                        return Ok("Izmena uspesna!");
+                    }  
                 }
-            _repo.ChangeLokal(lok);
-            return Ok(lok);
+                return NotFound();
             //return CreatedAtRoute(nameof(GetLokalById), new {Id=lok.LokalID},lok);
         }
 

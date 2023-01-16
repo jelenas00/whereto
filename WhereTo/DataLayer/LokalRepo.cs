@@ -28,8 +28,6 @@ namespace WhereTo.DataLayer
                     novi.Lokacija=lok.Lokacija;
                     novi.Tagovi=lok.Tagovi;
                     novi.Dogadjaji=lok.Dogadjaji;
-                    novi.Email=lok.Email;
-                    novi.Password=lok.Password;
                     var upis= JsonSerializer.Serialize(novi);
                     if(novi.Tagovi!=null)
                         foreach(var tag in novi.Tagovi)
@@ -40,6 +38,23 @@ namespace WhereTo.DataLayer
                 return null;
             }
             return null;
+        }
+        public Lokal? ChangeLokalLogInfo(string id,string mail,string pass)
+        {
+            var db= _redis.GetDatabase();
+                Lokal? novi= JsonSerializer.Deserialize<Lokal>(db.HashGet("lokalihes",id));
+                if(novi!=null)
+                {
+                    novi.Email=mail;
+                    novi.Password=pass;
+                    var upis= JsonSerializer.Serialize(novi);
+                    if(novi.Tagovi!=null)
+                        foreach(var tag in novi.Tagovi)
+                            db.HashSet(tag,new HashEntry[]{new HashEntry(novi.LokalID,upis)});
+                    db.HashSet("lokalihes",new HashEntry[]{new HashEntry(novi.LokalID,upis)});
+                    return novi;
+                }
+                return null;
         }
 
         public void CreateLokal(Lokal lok)

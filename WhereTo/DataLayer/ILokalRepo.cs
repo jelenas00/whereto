@@ -10,6 +10,7 @@ namespace WhereTo.DataLayer
         IEnumerable<Lokal?>? GetLokaliByTag(string tag);
         void DeleteLokal(string id);
         Lokal? ChangeLokal(Lokal lok);
+        Lokal? ChangeLokalLogInfo(string id,string mail,string pass);
         //dodavanje slike
     }
 }

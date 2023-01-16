@@ -58,9 +58,21 @@ namespace WhereTo.Controllers
             return Ok(listaDogadjaja);
         }
 
-        [Route("DodajTagDogadjaju/{dogid}/{tag}")]
+        [Route("ChangeDogadjaj")]
+        [HttpPut]//(Name="ChangeLokal")]
+        public ActionResult<Lokal>? ChangeDogadjaj(Dogadjaj dog)
+        {
+            var dogadjaj= _repo.GetDogadjajById(dog.DogadjajID);
+            if(dogadjaj!=null)
+            {
+                return Ok(_repo.ChangeDogadjaj(dog));
+            }
+            else return BadRequest("Nevalidan dogadjaj");
+        }
+
+        [Route("DodajTagDogadjaju/{idDogadjaja}/{tag}")]
         [HttpPut]
-        public ActionResult<Dogadjaj> DodajTagDogadjaju(string idDogadjaja,string Tag)
+        public ActionResult<Dogadjaj> DodajTagDogadjaju(string idDogadjaja,string tag)
         {
             var dogadjaj= _repo.GetDogadjajById(idDogadjaja);
             if(dogadjaj!=null)
@@ -69,11 +81,11 @@ namespace WhereTo.Controllers
                 {
                     int ponavljanjeTaga=0;
                     foreach(var el in dogadjaj.listaTagova)
-                        if(String.Equals(el,Tag)==true)
+                        if(String.Equals(el,tag)==true)
                             ponavljanjeTaga++;
                     if(ponavljanjeTaga==0)
-                        dogadjaj.listaTagova.Add(Tag);                 
-                    _repo.CreateDogadjaj(dogadjaj);
+                        dogadjaj.listaTagova.Add(tag);                 
+                    _repo.ChangeDogadjaj(dogadjaj);
 
                 return Ok(dogadjaj);
                 }
@@ -136,6 +148,7 @@ namespace WhereTo.Controllers
         [HttpPost]
         public ActionResult<Dogadjaj> CreateDogadjaj(Dogadjaj dogadjaj)
         {
+            var resp= new Dogadjaj();
             if(dogadjaj.listaTagova!=null)
             {
                 int ponavljanjeTaga=0;
@@ -144,14 +157,17 @@ namespace WhereTo.Controllers
                             ponavljanjeTaga++;
                 if(ponavljanjeTaga==0)
                     dogadjaj.listaTagova.Add("Dogadjaj");
+                resp=_repo.CreateDogadjaj(dogadjaj);
             }
             else
             {
                 dogadjaj.listaTagova?.Add("Dogadjaj");
+                resp=_repo.CreateDogadjaj(dogadjaj);
             }
-             _repo.CreateDogadjaj(dogadjaj);
-            //return CreatedAtRoute(nameof(GetDogadjajById), new {Id=dogadjaj.DogadjajID},dogadjaj);
-            return Ok(dogadjaj);
+            if(resp!=null)
+                return Ok(resp);
+            else 
+                return BadRequest("Somethihng went wrong");
         }
 
         [Route("DodajDogadjajLokalu")]

@@ -12,7 +12,37 @@ namespace WhereTo.DataLayer
         {
             _redis=redis;
         }
-        public void CreateDogadjaj(Dogadjaj dog)
+
+        public Dogadjaj? ChangeDogadjaj(Dogadjaj dog)
+        {
+            var db= _redis.GetDatabase();
+            if(db!=null)
+            {
+                Dogadjaj? izmena= GetDogadjajById(dog.DogadjajID);
+                if(izmena!=null)
+                {
+                    izmena.Datum=dog.Datum;
+                    izmena.Name=dog.Name;
+                    izmena.Organizator=dog.Organizator;
+                    izmena.listaTagova=dog.listaTagova;
+                    izmena.Korisnici=dog.Korisnici;
+                    var upis= JsonSerializer.Serialize(izmena);
+                    if(izmena.listaTagova!=null)
+                    {
+                        foreach(var tag in izmena.listaTagova)
+                        {
+                            db.HashSet(tag,new HashEntry[]{new HashEntry(izmena.DogadjajID,upis)});
+                        }
+                    }
+                    db.HashSet("lokalihes",new HashEntry[]{new HashEntry(izmena.DogadjajID,upis)});
+                    return izmena;
+                }
+                else return null;
+            }
+            else return null;
+        }
+
+        public Dogadjaj? CreateDogadjaj(Dogadjaj dog)
         {
             if(dog!=null)
             {
@@ -24,7 +54,9 @@ namespace WhereTo.DataLayer
                         db.HashSet(el, new HashEntry[]{new HashEntry (dog.DogadjajID,serialDog)});
                 }
                 db.HashSet(dog.Datum, new HashEntry[]{new HashEntry (dog.DogadjajID,serialDog)});
+                return dog;
             }
+            return null;
         }
 
         
@@ -57,7 +89,6 @@ namespace WhereTo.DataLayer
         public Dogadjaj? GetDogadjajById(string id)
         {
             var db=_redis.GetDatabase();
-            //var plat= db.StringGet(id);
 
             var dog=db.HashGet("Dogadjaj",id);
 

@@ -6,6 +6,11 @@ import { Lokal } from "./lokal.js";
 var api= new Api();
 var lok=await api.getLokalByTag("Lokal");
 console.log(lok)
+// var dog= await api.dodajTagDogadjaju("dogadjaj:f1f057f9-1e48-4b7e-9a05-3e81fce5de21","novovovo")
+// console.log(dog);
+
+// var lok= await api.izmeniKorisnika(new Korisnik("korisnik:eb3d0d95-d3d3-4a90-8932-0b2101537b46","proba22","proba2","proba2","proba2",null));
+// console.log(lok);
 // var lok= await api.getLokalById("lokal:f9a52ef7-2bc6-4b02-a835-82cc4749485a");
 // lok.lokacija="izmenjeno";
 // console.log(lok);

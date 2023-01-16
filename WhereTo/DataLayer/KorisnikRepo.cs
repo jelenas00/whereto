@@ -74,8 +74,6 @@ namespace WhereTo.DataLayer
                     //Korisnik novi= JsonSerializer.Deserialize<Korisnik>(stari);
                     novi.Name=korisnik.Name;
                     novi.LastName=korisnik.LastName;
-                    novi.Email=korisnik.Email;
-                    novi.Password=korisnik.Password;
                     novi.inbox=korisnik.inbox;
                     var upis= JsonSerializer.Serialize(novi);
                     db.HashSet("korisnikHes",new HashEntry[]{new HashEntry(novi.KorisnikID,upis)});
@@ -84,6 +82,24 @@ namespace WhereTo.DataLayer
                 return null;
             }
             return null;
+        }
+
+        public Korisnik? ChangeKorisnikLogInfo(string id, string mail,string pass)
+        {
+            var db= _redis.GetDatabase();
+                //var stari= db.HashGet("korisnikHes",korisnik.KorisnikID);
+                Korisnik? novi= JsonSerializer.Deserialize<Korisnik>(db.HashGet("korisnikHes",id));
+                //if(!stari.IsNullOrEmpty)
+                if(novi!=null)
+                {
+                    //Korisnik novi= JsonSerializer.Deserialize<Korisnik>(stari);
+                    novi.Email=mail;
+                    novi.Password=pass;
+                    var upis= JsonSerializer.Serialize(novi);
+                    db.HashSet("korisnikHes",new HashEntry[]{new HashEntry(novi.KorisnikID,upis)});
+                    return novi;
+                }
+                return null;
         }
     }
 }
