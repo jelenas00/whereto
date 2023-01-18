@@ -52,12 +52,13 @@ namespace WhereTo.Controllers
                             ponavljanjeTaga++;
                 if(ponavljanjeTaga==0)
                     lok.Tagovi.Add("Lokal");
+                _repo.CreateLokal(lok);
             }
             if(lok.Tagovi==null)
             {
-                lok.Tagovi?.Add("Lokal");
+                lok.Tagovi.Add("Lokal");
+                _repo.CreateLokal(lok);
             }
-            _repo.CreateLokal(lok);
             return Ok(lok);
         }
 

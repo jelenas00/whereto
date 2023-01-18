@@ -28,12 +28,40 @@
 
 
 
-				<form class="form-detail" action="#" method="post">
+				<form class="form-detail" action="#" method="post" onsubmit="return false">
 					<div class="tabcontent" id="sign-up">
 						<div class="form-row">
 							<label class="form-row-inner">
 								<input type="text" name="full_name" id="full_name" class="input-text" required>
 								<span class="label">Ime lokala</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="text" name="lokacija" id="lokacija" class="input-text" required>
+								<span class="label">Lokacija</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="text" name="vlasnik" id="vlasnik" class="input-text" required>
+								<span class="label">Vlasnik</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="text" name="radnoVreme" id="radnoVreme" class="input-text" required>
+								<span class="label">Radno vreme(08-22)</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="text" name="opis" id="opis" class="input-text" required>
+								<span class="label">Opis</span>
 		  						<span class="border"></span>
 							</label>
 						</div>
@@ -59,7 +87,7 @@
 							</label>
 						</div>
 						<div class="form-row-last">
-							<input type="submit" name="register" class="register" value="Registuj se">
+							<input type="submit" name="register" class="register" id="RegistrujSe" value="Registuj se">
 							<a href="index.html">
 								<input type="button" name="dugme" class="register" value="BACK">
 								<!-- <button class="dugme-debilno">BACK</button> -->
@@ -72,7 +100,7 @@
 
 				
 
-				<form class="form-detail" action="#" method="post">
+				<form class="form-detail" action="#" method="post" onsubmit="return false">
 					<div class="tabcontent" id="sign-in">
 						<div class="form-row">
 							<label class="form-row-inner">
@@ -89,7 +117,7 @@
 							</label>
 						</div>
 						<div class="form-row-last">
-							<input type="submit" name="register" class="register" value="Prijavi se">
+							<input type="submit" name="register" class="register" id="PrijaviSe" value="Prijavi se">
 							<a href="index.html">
 								<input type="button" name="dugme" class="register" value="BACK">
 								<!-- <button class="dugme-debilno">BACK</button> -->
@@ -122,5 +150,6 @@
 		// Get the element with id="defaultOpen" and click on it
 		document.getElementById("defaultOpen").click();
 	</script>
+	<script src="js/login-club-owners.js" type="module"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

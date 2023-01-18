@@ -292,7 +292,7 @@ export class Api
             case 200:
                 {
                     var el= await response.json();
-                    const korisnik= new Lokal(el.lokalID,el.name,el.lokacija,el.vlasnik,el.radnoVreme,el.opis,el.dogadjaji,el.tagovi);
+                    const korisnik= new Lokal(el.lokalID,el.name,el.lokacija,el.vlasnik,el.radnoVreme,el.opis,el.dogadjaji,el.tagovi,el.email,el.password);
                     return korisnik;
                 }
             case 400:{
@@ -409,7 +409,7 @@ export class Api
                 "Content-type":"application/json",
             },
             method:"POST",
-            body: JSON.stringify(lokal,["name","lokacija","vlasnik","radnoVreme","opis","dogadjaji","tagovi","email","password"])
+            body: JSON.stringify(lokal,["name","lokacija","vlasnik","radnoVreme","opis","tagovi","email","password"])
         });
 
         switch(response.status){
