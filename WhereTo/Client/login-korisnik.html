@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Form-v8 by Colorlib</title>
+	<title>Prijavi se kao Korisnik</title>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Font-->
@@ -19,18 +19,21 @@
 			<div class="form-right">
 				<div class="tab">
 					<div class="tab-inner">
-						<button class="tablinks" onclick="openCity(event, 'sign-up')" id="defaultOpen">Registuj lokal</button>
+						<button class="tablinks" onclick="openCity(event, 'sign-up')" id="defaultOpen">Registuj se</button>
 					</div>
 					<div class="tab-inner">
-						<button class="tablinks" onclick="openCity(event, 'sign-in')">Log in</button>
+						<button class="tablinks" onclick="openCity(event, 'sign-in')">Prijavi se</button>
 					</div>
 				</div>
+
+
+				
 				<form class="form-detail" action="#" method="post">
 					<div class="tabcontent" id="sign-up">
 						<div class="form-row">
 							<label class="form-row-inner">
 								<input type="text" name="full_name" id="full_name" class="input-text" required>
-								<span class="label">Ime lokala</span>
+								<span class="label">Ime</span>
 		  						<span class="border"></span>
 							</label>
 						</div>
@@ -56,10 +59,20 @@
 							</label>
 						</div>
 						<div class="form-row-last">
-							<input type="submit" name="register" class="register" value="Register">
+							<input type="submit" name="register" class="register" value="Registuj se">
+							<a href="index.html">
+								<input type="button" name="dugme" class="register" value="BACK">
+								<!-- <button class="dugme-debilno">BACK</button> -->
+								<!-- <input type="submit" name="register" class="register" value="Registuj se"> -->
+							</a>
 						</div>
+
+						
 					</div>
 				</form>
+
+
+
 				<form class="form-detail" action="#" method="post">
 					<div class="tabcontent" id="sign-in">
 						<div class="form-row">
@@ -77,13 +90,18 @@
 							</label>
 						</div>
 						<div class="form-row-last">
-							<input type="submit" name="register" class="register" value="Sign In">
+							<input type="submit" name="register" class="register" value="Prijavi se">
+							<a href="index.html">
+								<input type="button" name="dugme" class="register" value="BACK">
+								
+							</a>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 		function openCity(evt, cityName) {
 		    var i, tabcontent, tablinks;
