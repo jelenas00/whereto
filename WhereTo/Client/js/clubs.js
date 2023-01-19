@@ -16,7 +16,7 @@ lok.forEach(el => {
                     <br> 
                     <strong> vlasnik : </strong> <em> ${el.vlasnik} </em>
                     <br>
-                    <a href="#" class="link1">View Details</a></p>
+                    <a href="#" onclick="toggle(this)" class="link1">View Details</a></p>
                     
     </li>
     ----------------------------------------------------------------------------------

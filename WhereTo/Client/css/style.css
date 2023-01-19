@@ -440,6 +440,8 @@ footer a:hover {
 	font-weight:400;
 	border-radius: 10px;
 	text-align: center;
+	margin-left: 600px;
+
 }
 
 .datum-div {
@@ -449,6 +451,7 @@ footer a:hover {
 	font-size: large;
 	font:20px Arial, Helvetica, sans-serif;
 	margin-bottom: 8px;
+	margin-left: 605px;
 }
 
 
@@ -457,3 +460,20 @@ footer a:hover {
 	color: white;
 	margin: 10px;
 }
+
+
+/* .welcome-txt {
+
+}
+
+.details-lokal {
+
+} */
+
+
+/* #proba {
+	visibility: visible;
+}
+#proba2 {
+	visibility: hidden;
+} */
