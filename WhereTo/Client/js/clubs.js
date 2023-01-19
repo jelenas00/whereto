@@ -11,16 +11,21 @@ console.log(sekcija)
 
 lok.forEach(el => {
     sekcija.innerHTML+=`
+    
     <li>
-                  <p><span style="font-size: 30px;  color:rgb(212, 100, 237)" class="color1">${el.name}</span>
+                  <p><span style="font-size: 30px;  color:rgb(212, 100, 237)" class="color1"> <strong> ${el.name} </strong> </span> <br>
                     <br>
-                    lokacija : ${el.lokacija} 
+                    <strong> lokacija : </strong> <em> ${el.lokacija} </em> 
                     <br> 
-                    vlasnik : ${el.vlasnik}
+                    <strong> vlasnik : </strong> <em> ${el.vlasnik} </em>
                     <br>
                     <a href="#" class="link1">View Details</a></p>
-                </li>
+                    
+    </li>
+    ----------------------------------------------------------------------------------
+    
     `
+
 });
 var sekcija2= document.getElementById("dogadjaji");
 dog.forEach(el => {
@@ -30,13 +35,31 @@ dog.forEach(el => {
     else var org=new Lokal(null,"nema","nema","nema","nema","nema",null,[],"nema","nema");
     sekcija2.innerHTML+=`
     <li>
-                  <p><span style="font-size: 30px;  color:rgb(212, 100, 237)" class="color1">${el.name}</span>
+                <span  class="dropcap_1"> ${el.datum} <!--30--><span><!--august--></span></span>
+                  <p><span style="font-size: 30px;  color:rgb(212, 100, 237)" class="color1"> Događaj 1 - <strong> ${el.name} </strong> </span><br>
                     <br>
-                    lokacija : ${org.lokacija} 
+                    <strong> lokacija :</strong>  <em> ${org.lokacija} </em>
                     <br> 
-                    Organizator : ${org.name}
+                    <strong> organizator : </strong> <em> ${org.name} </em>
                     <br>
                     <a href="#" class="link1">View Details</a></p>
-                </li>
+    </li>
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     `
 });
+
+// $(document).ready(function () {
+//     //gallery
+//     $("#lokali").jCarouselLite({
+//         btnNext: ".next",
+//         btnPrev: ".prev",
+//         mouseWheel: true,
+//         vertical: true,
+//         circular: true,
+//         visible: 2,
+//         speed: 600,
+//         easing: 'easeOutCirc'
+//     });
+//     Cufon.now();
+// })

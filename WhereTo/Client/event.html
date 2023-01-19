@@ -24,14 +24,11 @@
     <header>
       <nav>
         <ul id="menu">
-          <li><a href="index.html">Club</a></li>
+          <li><a href="index-club.html">Pocetna</a></li>
           <!-- <li><a href="parties.html">Parties</a></li> -->
           <!-- <li><a href="gallery.html">Gallery</a></li> -->
-          <li><a href="residents.html">Residents</a></li>
-          <li><a href="news.html">News</a></li>
-          <li><a href="login-club-owners.html">Club owners</a></li>
-          <li><a href="login-korisnik.html">Log in</a></li>
-          <li class="active"><a href="event.html">Event</a></li>
+          <li class="active"><a href="event.html"> Kreiraj dogadjaj</a></li>
+          <li><a href="index.html">Log out</a></li>
         </ul>
       </nav>
       <h1><a href="index.html" id="logo">nightclub feel the rhythm</a></h1>
@@ -41,23 +38,30 @@
       <!--content -->
       <article id="content">
         <div class="wrapper">
-          <h2>Contact Form</h2>
+          <h2>Kreiraj dogadjaj :</h2>
           <form id="ContactForm" action="#">
             <div>
-              <div class="wrapper"> <span>Name:</span>
-                <input type="text" class="input" >
+              <div class="wrapper"> <span class="labela-event">Naziv:</span>
+                <input type="text" class="input" name="Name">
               </div>
-              <div class="wrapper"> <span>Email:</span>
-                <input type="text" class="input" >
+              <div class="wrapper"> <span class="labela-event">Oragnizator:</span>
+                <input type="text" class="input" name="Lokal">
               </div>
-              <div class="wrapper"> <span>Subject:</span>
-                <input type="text" class="input" >
+              <!-- <div class="wrapper"> <span class="labela-event">Korisnici:</span>
+                <input type="text" class="input" name="Koristnici" >
+              </div> -->
+              <div class="wrapper"> <span class="labela-event">Datum:</span>
+                <input type="datetime-local" class="input" name="Datum" >
               </div>
-              <div class="textarea_box"> <span>Message:</span>
+              <div class="wrapper"> <span class="labela-event">Tagovi:</span>
+                <input type="text" class="input" name="ListaTagova">
+              </div>
+              <!-- <div class="textarea_box"> <span>Message:</span>
                 <textarea name="textarea" cols="1" rows="1"></textarea>
-              </div>
+              </div> -->
               <a href="#" class="button">send</a> <a href="#" class="button">clear</a> </div>
           </form>
+          
         </div>
         <div class="wrapper">
           <div class="col1">
