@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>nightclub | Parties</title>
+<title>WhereTo</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -11,53 +11,60 @@
 <script src="js/cufon-replace.js"></script>
 <script src="js/NewsGoth_BT_400.font.js"></script>
 <script src="js/NewsGoth_BT_700.font.js"></script>
+<script src="js/jcarousellite.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
 <script src="js/atooltip.jquery.js"></script>
-<script src="proba.js" type="module"></script>
 <!--[if lt IE 9]>
 <script src="js/html5.js"></script>
 <link rel="stylesheet" href="css/ie.css" type="text/css" media="all">
 <![endif]-->
 </head>
-<body id="page2">
+<body id="page1">
 <div class="bg1">
   <div class="main">
     <!--header -->
     <header>
       <nav>
         <ul id="menu">
-          <li><a href="index.html">WhereTo</a></li>
-          <li><a href="clubs.html">Clubs</a></li>
-          <!-- <li class="active"><a href="parties.html">Parties</a></li> -->
-          <!-- <li><a href="gallery.html">Gallery</a></li> -->
-          <li><a href="login-club-owners.html">Login Lokal</a></li>
-          <li><a href="login-korisnik.html">Login Korisnik</a></li>
+            <li id="welcom"><a href="index-korisnik.html">Pocetna</a></li>
+            <li class="active"><a href="clubs-korisnik.html">Lokali</a></li>
+            <li><a href="dogadjaji-korisnik.html">Dogadjaji</a></li>
+            <li><a href="news-korisnik.html">News</a></li>
+            <li><a href="korisnik-profil.html">Profil</a></li>
+            <li><a href="index.html">Log out</a></li>
         </ul>
       </nav>
-      <h1><a href="index.html" id="logo">nightclub feel the rhythm</a></h1>
+      <h1><a href="clubs.html" id="logo">WhereTo najbolji provod u gradu!</a></h1>
     </header>
     <!--header end-->
     <div class="box">
       <!--content -->
       <article id="content">
-        <div class="wrapper">
-          <h2>Upcoming Parties</h2>
-          <div class="wrapper">
-            <div class="cols marg_right1">
-              <figure class="pad_bot1"><a href="#"><img src="images/page2_img1.jpg" alt=""></a></figure>
-              <figure><a href="#"><img src="images/page2_img2.jpg" alt=""></a></figure>
+        <div class="wrapper pad_bot1">
+          
+          
+          <section class="col1">
+            <p id="welcom">Dobrodošli !</h2>
+            <p style="font-size: 18px" class="color1">WhereTo je aplikacija napravljena kako bi vama olakšala nalaženje savršenog mesta za izlazak.
+               Kroz samo par klika i pretraga pronadjite tip dogadjaja koji je baš po vašem ukusu! </p>
+            <p style="font-size: 18px" class="pad_bot1">Pronađite klub, kafanu, pivnicu, splav za vaš savršen provod.</p>
+            <a href="#" class="link1">Read More</a> 
+          </section>
+
+
+          <section class="col1 pad_left1">
+            <h2>LOKALI</h2>
+            <div >
+              <ul id="lokali">
+                
+              </ul>
             </div>
-            <div class="cols marg_right1">
-              <figure class="pad_bot1"><a href="#"><img src="images/page2_img3.jpg" alt=""></a></figure>
-              <figure><a href="#"><img src="images/page2_img4.jpg" alt=""></a></figure>
-            </div>
-            <div class="cols">
-              <figure class="pad_bot1"><a href="#"><img src="images/page2_img5.jpg" alt=""></a></figure>
-              <figure><a href="#"><img src="images/page2_img6.jpg" alt=""></a></figure>
-            </div>
-          </div>
-        </div>
+            <a href="#" class="next"></a> <a href="#" class="prev"></a> 
+           </section>
       </article>
       <!--content end-->
+
       <!--footer -->
       <footer>
         <div class="line1">
@@ -101,6 +108,22 @@
     </div>
   </div>
 </div>
-<script>Cufon.now();</script>
+<script>
+$(document).ready(function () {
+    //gallery
+    $("#gallery1").jCarouselLite({
+        btnNext: ".next",
+        btnPrev: ".prev",
+        mouseWheel: true,
+        vertical: true,
+        circular: true,
+        visible: 2,
+        speed: 600,
+        easing: 'easeOutCirc'
+    });
+    Cufon.now();
+})
+</script>
+<script src="js/clubs.js" type="module" ></script>
 </body>
 </html>

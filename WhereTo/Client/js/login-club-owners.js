@@ -18,9 +18,10 @@ reg.onclick=async function()
         var list=[]
         console.log(ime,lokacija,vlasnik,radnoVreme,opis,email,pass);
         var log = await api.dodajLokal(new Lokal(null,ime,lokacija,vlasnik,radnoVreme,opis,null,list,email,pass));
-        if(log)
+        if(log instanceof Lokal && log!=null)
         {
             console.log("jeeeej")
+            window.location.href = "index-club.html";
         }
         else
             alert("Neuspesna prijava!")
@@ -36,4 +37,11 @@ pri.onclick=async function (){
     console.log(email,pass)
     var log= await api.getLokalPrijava(email,pass);
     console.log(log);
+    if(log instanceof Lokal && log!=null)
+        {
+            console.log("jeeeej")
+            window.location.href = "index-club.html";
+        }
+        else
+            alert("Pogresnan mail/lozinka!")
 }

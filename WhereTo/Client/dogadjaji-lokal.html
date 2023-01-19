@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>nightclub | Contacts</title>
+<title>WhereTo</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -12,22 +12,23 @@
 <script src="js/NewsGoth_BT_400.font.js"></script>
 <script src="js/NewsGoth_BT_700.font.js"></script>
 <script src="js/atooltip.jquery.js"></script>
+<script src="proba.js" type="module"></script>
 <!--[if lt IE 9]>
 <script src="js/html5.js"></script>
 <link rel="stylesheet" href="css/ie.css" type="text/css" media="all">
 <![endif]-->
 </head>
-<body id="page6">
+<body id="page2">
 <div class="bg1">
   <div class="main">
     <!--header -->
     <header>
       <nav>
         <ul id="menu">
-          <li><a href="index-club.html">Pocetna</a></li>
-          <li><a href="dogadjaji-lokal.html">Dogadjaji kluba</a></li>
+            <li><a href="index-club.html">Pocetna</a></li>
+          <li class="active"><a href="dogadjaji-lokal.html">Dogadjaji kluba</a></li>
           <li><a href="lokal-profil.html">Profil</a></li>
-          <li class="active"><a href="event.html"> Kreiraj dogadjaj</a></li>
+          <li><a href="event.html">Kreiraj dogadjaj</a></li>
           <li><a href="index.html">Log out</a></li>
         </ul>
       </nav>
@@ -38,48 +39,21 @@
       <!--content -->
       <article id="content">
         <div class="wrapper">
-          <h2>Kreiraj dogadjaj :</h2>
-          <form id="ContactForm" action="#">
-            <div>
-              <div class="wrapper"> <span class="labela-event">Naziv:</span>
-                <input type="text" class="input" name="Name">
+          <h2>Upcoming Parties</h2>
+          <div class="wrapper">
+            <h2 style="letter-spacing: -1px;">  DOGADJAJI  </h2>
+            <div class="wrapper" > 
+              <div class="datum-div"> Izaberite datum: 
+                <div>
+                  <input class="datum-picker" type="date">
+                  <div></div>
+                </div>
+              </div> 
+              
+              <div>
+                <ul id="dogadjaji">
+                </ul>
               </div>
-              <div class="wrapper"> <span class="labela-event">Oragnizator:</span>
-                <input type="text" class="input" name="Lokal">
-              </div>
-              <!-- <div class="wrapper"> <span class="labela-event">Korisnici:</span>
-                <input type="text" class="input" name="Koristnici" >
-              </div> -->
-              <div class="wrapper"> <span class="labela-event">Datum:</span>
-                <input type="datetime-local" class="input" name="Datum" >
-              </div>
-              <div class="wrapper"> <span class="labela-event">Tagovi:</span>
-                <input type="text" class="input" name="ListaTagova">
-              </div>
-              <!-- <div class="textarea_box"> <span>Message:</span>
-                <textarea name="textarea" cols="1" rows="1"></textarea>
-              </div> -->
-              <a href="#" class="button">send</a> <a href="#" class="button">clear</a> </div>
-          </form>
-          
-        </div>
-        <div class="wrapper">
-          <div class="col1">
-            <h2>Contact Form</h2>
-            <p class="color1 pad_bot1">8901 Marmora, Glasgow, D04 89GR</p>
-            <p class="address">Freephone:<br>
-              Telephone:<br>
-              FAX:<br>
-              E-mail:</p>
-            <p>+1 800 559 6580<br>
-              +1 959 603 6035<br>
-              +1 504 889 9898<br>
-              <a href="#" class="link2">mail@demolink.org</a></p>
-          </div>
-          <div class="col2 pad_left1">
-            <h2>Miscellaneous Info</h2>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque.</p>
-          </div>
         </div>
       </article>
       <!--content end-->
@@ -127,5 +101,6 @@
   </div>
 </div>
 <script>Cufon.now();</script>
+<script src="js/dogadjaji.js" type="module" ></script>
 </body>
 </html>

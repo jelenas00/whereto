@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>nightclub | News</title>
+<title>WhereTo</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -12,26 +12,25 @@
 <script src="js/NewsGoth_BT_400.font.js"></script>
 <script src="js/NewsGoth_BT_700.font.js"></script>
 <script src="js/atooltip.jquery.js"></script>
+<script src="proba.js" type="module"></script>
 <!--[if lt IE 9]>
 <script src="js/html5.js"></script>
 <link rel="stylesheet" href="css/ie.css" type="text/css" media="all">
 <![endif]-->
 </head>
-<body id="page5">
+<body id="page2">
 <div class="bg1">
   <div class="main">
     <!--header -->
     <header>
       <nav>
         <ul id="menu">
-          <li><a href="index.html">Club</a></li>
-          <!-- <li><a href="parties.html">Parties</a></li> -->
-          <!-- <li><a href="gallery.html">Gallery</a></li> -->
-          <li><a href="residents.html">Residents</a></li>
-          <li><a href="login-club-owners.html">Login Lokal</a></li>
-          <li><a href="login-korisnik.html">Login Korisnik</a></li>
-          <li class="active"><a href="news.html">News</a></li>
-          <li><a href="contacts.html">Contacts</a></li>
+            <li id="welcom"><a href="index-korisnik.html">Pocetna</a></li>
+            <li><a href="clubs-korisnik.html">Lokali</a></li>
+            <li class="active" ><a href="dogadjaji-korisnik.html">Dogadjaji</a></li>
+            <li><a href="news-korisnik.html">News</a></li>
+            <li><a href="korisnik-profil.html">Profil</a></li>
+            <li><a href="index.html">Log out</a></li>
         </ul>
       </nav>
       <h1><a href="index.html" id="logo">nightclub feel the rhythm</a></h1>
@@ -41,24 +40,21 @@
       <!--content -->
       <article id="content">
         <div class="wrapper">
-          <h2><strong>02.09.</strong> Sed ut perspiciatis unde omnis iste natus</h2>
-          <div class="wrapper pad_bot1">
-            <figure class="left marg_right1"><img src="images/page5_img1.jpg" alt=""></figure>
-            <p class="color1 pad_bot1">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas.</p>
-            <p class="pad_bot1">Molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerufacilis est et expedita distinctio. Nam libero tepre cum soluta nobis est eligendi.</p>
-            <a href="#" class="link2">Read More</a> </div>
-          <h2><strong>29.08.</strong> Error sit voluptatem accusantium</h2>
-          <div class="wrapper pad_bot1">
-            <figure class="left marg_right1"><img src="images/page5_img2.jpg" alt=""></figure>
-            <p class="color1 pad_bot1">Molestias excepturi sint occaecati cupiditate non facere possimus, omnis voluptas assum enda est, omnis dolor repellendus.</p>
-            <p class="pad_bot1">Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eve provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga est et expedita distinctio cum soluta nobis eligendi.</p>
-            <a href="#" class="link2">Read More</a> </div>
-          <h2><strong>22.08.</strong> Nemo enim ipsam voluptatem quia voluptas</h2>
+          <h2>Upcoming Parties</h2>
           <div class="wrapper">
-            <figure class="left marg_right1"><img src="images/page5_img3.jpg" alt=""></figure>
-            <p class="color1 pad_bot1">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas.</p>
-            <p class="pad_bot1">Molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerufacilis est et expedita distinctio. Nam libero tepre cum soluta nobis est eligendi.</p>
-            <a href="#" class="link2">Read More</a> </div>
+            <h2 style="letter-spacing: -1px;">  DOGADJAJI  </h2>
+            <div class="wrapper" > 
+              <div class="datum-div"> Izaberite datum: 
+                <div>
+                  <input class="datum-picker" type="date">
+                  <div></div>
+                </div>
+              </div> 
+              
+              <div>
+                <ul id="dogadjaji">
+                </ul>
+              </div>
         </div>
       </article>
       <!--content end-->
@@ -106,5 +102,6 @@
   </div>
 </div>
 <script>Cufon.now();</script>
+<script src="js/dogadjaji.js" type="module" ></script>
 </body>
 </html>

@@ -56,7 +56,7 @@ namespace WhereTo.Controllers
             }
             if(lok.Tagovi==null)
             {
-                lok.Tagovi.Add("Lokal");
+                lok.Tagovi?.Add("Lokal");
                 _repo.CreateLokal(lok);
             }
             return Ok(lok);
