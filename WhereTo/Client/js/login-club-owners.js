@@ -20,7 +20,8 @@ reg.onclick=async function()
         var log = await api.dodajLokal(new Lokal(null,ime,lokacija,vlasnik,radnoVreme,opis,null,list,email,pass));
         if(log instanceof Lokal && log!=null)
         {
-            console.log("jeeeej")
+            console.log("jeeeej");
+            sessionStorage.setItem("logLokal",JSON.stringify(log));
             window.location.href = "index-club.html";
         }
         else
@@ -40,6 +41,7 @@ pri.onclick=async function (){
     if(log instanceof Lokal && log!=null)
         {
             console.log("jeeeej")
+            sessionStorage.setItem("logLokal",JSON.stringify(log));
             window.location.href = "index-club.html";
         }
         else

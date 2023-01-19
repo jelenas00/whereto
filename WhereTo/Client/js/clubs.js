@@ -2,10 +2,7 @@ import { Api } from "../api.js"
 import { Lokal } from "../lokal.js"
 var api= new Api();
 var lok=await api.getLokali();
-var dog=await api.getDogadjajByTag("Dogadjaj");
 console.log(lok)
-console.log(dog)
-console.log("De si bre")
 var sekcija= document.getElementById("lokali");
 console.log(sekcija)
 

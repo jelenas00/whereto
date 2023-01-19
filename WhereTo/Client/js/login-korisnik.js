@@ -17,6 +17,7 @@ reg.onclick=async function()
         if(log instanceof Korisnik && log!=null)
         {
             console.log("jeeeej")
+            sessionStorage.setItem("logKorisnik",JSON.stringify(log));
             window.location.href = "index-korisnik.html";
         }
         else
@@ -36,6 +37,7 @@ pri.onclick=async function (){
     if(log instanceof Korisnik && log!=null)
         {
             console.log("jeeeej")
+            sessionStorage.setItem("logKorisnik",JSON.stringify(log));
             window.location.href = "index-korisnik.html";
         }
         else

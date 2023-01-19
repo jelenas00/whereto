@@ -459,7 +459,7 @@ export class Api
     } 
 
     async dodajDogadjaj(dogadjaj){
-
+        console.log(dogadjaj.organizator)
         let response = await fetch("http://localhost:5089/api/Dogadjaj/CreateDogadjaj",
         {
             headers:
@@ -468,7 +468,8 @@ export class Api
                 "Content-type":"application/json",
             },
             method:"POST",
-            body: JSON.stringify(dogadjaj,[ "name","organizator","korisnici","datum","listaTagova"])
+            body:JSON.stringify(dogadjaj,[ "name",dogadjaj.organizator,["lokalID","name","lokacija","vlasnik","radnoVreme","opis","tagovi","email","password"],"korisnici","datum","listaTagova"])
+            // body: JSON.stringify(dogadjaj,[ "name","organizator","korisnici","datum","listaTagova"])
         });
 
         switch(response.status){
