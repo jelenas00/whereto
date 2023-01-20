@@ -530,8 +530,7 @@ export class Api
 
         switch(response.status){
             case 200: {
-                console.log(await response.json());
-                return true;
+                return response.json();
             }
             case 400:{
                 console.log(`Client error: ${await response.text()}`);
@@ -587,8 +586,7 @@ export class Api
 
         switch(response.status){
             case 200: {
-                console.log(await response.json());
-                return true;
+                return response.json();
             }
             case 400:{
                 console.log(`Client error: ${await response.text()}`);

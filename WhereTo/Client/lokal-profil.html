@@ -41,49 +41,41 @@
     
     <!-- content start -->
     <div class="box">
-
+      <p style="text-align: end;"><button class="lepibutton" id="obrisiLokal">Obrisi lokal</button></p>
       <article id="content">
         <div class="wrapper">
           <h2>Izmeni informacije o lokalu:</h2>
-          <form id="ContactForm" action="#">
+          <form class="ContactForm" id="izmenaLokalForma" action="#">
             <div>
-              <!-- <div class="wrapper"> <span class="labela-event">Oragnizator:</span>
-                <input type="text" class="input" name="Lokal">
-              </div> -->
-              <!-- <div class="wrapper"> <span class="labela-event">Korisnici:</span>
-                <input type="text" class="input" name="Koristnici" >
-              </div> -->
-              <!-- <div class="wrapper"> <span class="labela-event">Datum:</span>
-                <input type="datetime-local" class="input" name="Datum" >
-              </div> -->
-              <div class="wrapper"> <span class="labela-event">Naziv lokala:</span>
+              <div class="wrapper"> <span class="labela-event">Naziv:</span>
                 <input type="text" class="input" name="Name">
               </div>
-              <div class="wrapper"> <span class="labela-event">Lokacija lokala:</span>
+              <div class="wrapper"> <span class="labela-event">Lokacija:</span>
                 <input type="text" class="input" name="Lokacija">
               </div>
-              <div class="wrapper"> <span class="labela-event">Vlasnik lokala:</span>
+              <div class="wrapper"> <span class="labela-event">Vlasnik:</span>
                 <input type="text" class="input" name="Vlasnik">
               </div>
               <div class="wrapper"> <span class="labela-event">Radno vreme:</span>
                 <input type="text" class="input" name="RadnoVreme" placeholder="08 - 22 h">
               </div>
-              <div class="wrapper"> <span class="labela-event">Opis lokala:</span>
+              <div class="wrapper"> <span class="labela-event">Opis:</span>
                 <input type="text" class="input" name="Vlasnik">
-              </div>
-              <div class="wrapper"> <span class="labela-event">Novi Email:</span>
-                <input type="text" class="input" name="Email">
-              </div>
-              <div class="wrapper"> <span class="labela-event">Nova Lozinka:</span>
-                <input type="text" class="input" name="Lozinka">
               </div>
               <div class="wrapper"> <span class="labela-event">Tagovi:</span>
                 <input type="text" class="input" name="ListaTagova">
               </div>
-              <!-- <div class="textarea_box"> <span>Message:</span>
-                <textarea name="textarea" cols="1" rows="1"></textarea>
-              </div> -->
-              <a href="#" class="button">potvrdi izmene</a> <a href="#" class="button">clear</a> </div>
+              <a href="#" class="button" id="lokalIzmena">Potvrdi izmene</a> <a href="#" class="button">clear</a> </div>
+          </form>
+          <h2>Izmeni mejl/lozinku:</h2>
+          <form class="ContactForm" id="izmenaKredencijalaForma" action="#">
+            <div class="wrapper"> <span class="labela-event">Novi Email:</span>
+                <input type="text" class="input" name="Email">
+              </div>
+              <div class="wrapper"> <span class="labela-event">Nova Lozinka:</span>
+                <input type="password" class="input" name="Lozinka">
+              </div>
+              <a href="#" class="button" id="lokalPassIzmena">Izmeni</a></div>
           </form>
           
         </div>
@@ -102,5 +94,6 @@
 </div>
 </div>
 <script src="./logout.js" type="module" ></script>
+<script src="js/lokal-profil.js" type="module" ></script>
 </body>
 </html>

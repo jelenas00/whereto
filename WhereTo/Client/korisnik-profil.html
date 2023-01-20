@@ -44,11 +44,11 @@
     <div class="box">
    <!-- content start -->
     <div class="box">
-
+      <p style="text-align: end;"><button class="lepibutton" id="obrisiNalog">Obrisi nalog</button></p>
       <article id="content">
         <div class="wrapper">
           <h2>Izmeni informacije o sebi:</h2>
-          <form id="ContactForm" action="#">
+          <form class="ContactForm" id="korisnikForma" action="#">
             <div>
              
               <div class="wrapper"> <span class="labela-event">Ime:</span>
@@ -61,9 +61,9 @@
                 <input type="text" class="input" name="Email">
               </div>
               <div class="wrapper"> <span class="labela-event">Nova Lozinka:</span>
-                <input type="text" class="input" name="Lozinka">
+                <input type="password" required="required" placeholder="Stara lozinka za potvrdu ili nova u slucaju izmene!" class="input" name="Lozinka">
               </div>
-              <a href="#" class="button">potvrdi izmene</a> <a href="#" class="button">clear</a> </div>
+              <a href="#" class="button" id="potvrdaIzmene">Potvrdi izmene</a> <a href="#" class="button">clear</a> </div>
           </form>
           
         </div>
@@ -75,5 +75,6 @@
   </div>
 </div>
 <script src="./logout.js" type="module" ></script>
+<script src="js/korisnik-profil.js" type="module" ></script>
 </body>
 </html>

@@ -115,9 +115,10 @@ namespace WhereTo.Controllers
         public ActionResult<Lokal>? ChangeLokal(Lokal lok)
         {
             var zaIzmenu=_repo.GetLokalById(lok.LokalID);
+            var resp=new Lokal();
             if(zaIzmenu!=null)
             {
-                _repo.ChangeLokal(lok);
+                resp=_repo.ChangeLokal(lok);
                 var lokal = _repo.GetLokalById(lok.LokalID);
                 if(lokal!=null)
                     if(lokal.Dogadjaji!=null)
@@ -133,7 +134,7 @@ namespace WhereTo.Controllers
                             
                         }
                     }
-                return Ok(lokal);
+                return Ok(resp);
             }
             else
                 return BadRequest("Lokal nije nadjen");
