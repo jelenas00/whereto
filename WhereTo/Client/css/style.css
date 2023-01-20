@@ -463,6 +463,11 @@ footer a:hover {
 .dogadjajidiv{
 	display: flex;
 	flex-direction: row;
+	justify-content: space-evenly;
+}
+.divdogkor{
+	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 }
 
@@ -489,6 +494,11 @@ footer a:hover {
 	box-shadow: 0 0 6px rgba(152, 103, 190, .5);
 	-moz-box-shadow: 0 0 6px rgba(152, 103, 190, .5);
 	-webkit-box-shadow:  0 0 6px rgba(152, 103, 190, .5)
+}
+
+.search{
+	display: flex;
+	flex-direction: row;
 }
 
 /* .welcome-txt {

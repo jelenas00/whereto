@@ -347,15 +347,21 @@ export class Api
             case 200:
                 {
                     var data= await response.json();
-                    data.forEach(el=>{
-                        const dog= new Dogadjaj(el.dogadjajID, el.name,el.organizator,el.korisnici,el.datum,el.listaTagova);
+                    if(data.length>1){
+                        data.forEach(el=>{
+                            const dog= new Dogadjaj(el.dogadjajID, el.name,el.organizator,el.korisnici,el.datum,el.listaTagova);
+                            list.push(dog)
+                        });
+                    }
+                    else{
+                        const dog= new Dogadjaj(data.dogadjajID, data.name,data.organizator,data.korisnici,data.datum,data.listaTagova);
                         list.push(dog)
-                    });
+                    }
                     return list;
                 }
             case 204:
                 {
-                    return "Sve ok";
+                    return "Server ne vraca podatke";
                 }
             case 400:{
                 console.log(`Client error: ${await response.text()}`);
@@ -609,6 +615,20 @@ export class Api
             },
             method:"PUT"
         });
+        switch(response.status){
+            case 200: {
+                console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
     }
     async izmeniKorisnikaLogInfo(korisnik,mail,pass){
 
