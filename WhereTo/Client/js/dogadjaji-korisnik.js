@@ -56,9 +56,9 @@ async function prijaviMe(idd){
 
 let search=document.getElementById("search")
 search.onclick=(ev)=>{
-    let tag=document.getElementById("searchinput")
-
-    if(tag.value.length==0){
+    let tag=document.getElementById("searchinput").value
+    console.log(tag)
+    if(tag.length==0){
         alert("Niste uneli tag")
     }
     else{
