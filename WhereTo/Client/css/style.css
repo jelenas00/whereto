@@ -460,6 +460,11 @@ footer a:hover {
 	color: white;
 	margin: 10px;
 }
+.dogadjajidiv{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
 
 
 /* .welcome-txt {

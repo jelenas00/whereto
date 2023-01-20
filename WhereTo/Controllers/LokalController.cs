@@ -33,6 +33,7 @@ namespace WhereTo.Controllers
         public ActionResult<Lokal> CreateLokal(Lokal lok)
         {
             var lokali = _repo.GetAllLokali();
+            var resp=new Lokal();
             if (lokali != null)
             {
                 foreach(var l in lokali)
@@ -52,14 +53,14 @@ namespace WhereTo.Controllers
                             ponavljanjeTaga++;
                 if(ponavljanjeTaga==0)
                     lok.Tagovi.Add("Lokal");
-                _repo.CreateLokal(lok);
+                resp=_repo.CreateLokal(lok);
             }
             if(lok.Tagovi==null)
             {
                 lok.Tagovi?.Add("Lokal");
-                _repo.CreateLokal(lok);
+                resp=_repo.CreateLokal(lok);
             }
-            return Ok(lok);
+            return Ok(resp);
         }
 
         [Route("GetAllLokali")]

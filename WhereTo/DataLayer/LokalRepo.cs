@@ -57,7 +57,7 @@ namespace WhereTo.DataLayer
                 return null;
         }
 
-        public void CreateLokal(Lokal lok)
+        public Lokal? CreateLokal(Lokal lok)
         {
             if(lok!=null)
             {
@@ -70,9 +70,7 @@ namespace WhereTo.DataLayer
                 }
                 db.HashSet("lokalihes", new HashEntry[]{new HashEntry(lok.LokalID,serialLok)});
             }
-            else{
-                throw new ArgumentOutOfRangeException(nameof(lok));
-            }
+            return lok;
         }
 
         public void DeleteLokal(string id)

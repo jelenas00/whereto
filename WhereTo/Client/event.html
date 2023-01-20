@@ -29,10 +29,10 @@
           <li><a href="dogadjaji-lokal.html">Dogadjaji lokala</a></li>
           <li class="active"><a href="event.html"> Kreiraj dogadjaj</a></li>
           <li><a href="lokal-profil.html">Profil</a></li>
-          <li><a href="index.html">Log out</a></li>
+          <li><a href="#" name="odjava">Log out</a></li>
         </ul>
       </nav>
-      <h1><a href="index.html" id="logo">nightclub feel the rhythm</a></h1>
+      <h1><a href="index-club.html" id="logo">nightclub feel the rhythm</a></h1>
     </header>
     <!--header end-->
     <div class="box">
@@ -43,24 +43,18 @@
           <form id="ContactForm" action="#">
             <div>
               <div class="wrapper"> <span class="labela-event">Naziv dogadjaja:</span>
-                <input type="text" class="input" name="Name">
+                <input type="text" class="input" id="name" name="Name">
               </div>
-              <div class="wrapper"> <span class="labela-event">Oragnizator dogadjaja:</span>
-                <input type="text" class="input" name="Lokal">
-              </div>
-              <!-- <div class="wrapper"> <span class="labela-event">Korisnici:</span>
-                <input type="text" class="input" name="Koristnici" >
-              </div> -->
               <div class="wrapper"> <span class="labela-event">Datum i vreme:</span>
-                <input type="datetime-local" class="input" name="Datum">
+                <input type="date" class="input" id="date" name="Datum">
               </div>
               <div class="wrapper"> <span class="labela-event">Tagovi:</span>
-                <input type="text" class="input" name="ListaTagova">
+                <input type="text" class="input" id="tags" name="ListaTagova">
               </div>
               <!-- <div class="textarea_box"> <span>Message:</span>
                 <textarea name="textarea" cols="1" rows="1"></textarea>
               </div> -->
-              <a href="#" class="button">kreiraj</a> <a href="#" class="button">clear</a> </div>
+              <a href="#" class="button" id="send">kreiraj</a> <a href="#" class="button">clear</a> </div>
           </form>
           
         </div>
@@ -128,5 +122,7 @@
   </div>
 </div>
 <script>Cufon.now();</script>
+<script src="./js/kreiraj-dogadjaj.js" type="module" ></script>
+<script src="./logout.js" type="module" ></script>
 </body>
 </html>

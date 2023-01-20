@@ -92,7 +92,7 @@ export class Api
         }
     }
     //GET//////////////////////////////////////////////
-    async getLokaleDogadjaja(id)
+    async getDogadjajeLokala(id)
     {
         let list=[]
         let response= await fetch("http://localhost:5089/api/Dogadjaj/GetDogadjajeLokala/"+id, 
@@ -409,13 +409,13 @@ export class Api
                 "Content-type":"application/json",
             },
             method:"POST",
-            body: JSON.stringify(lokal,["name","lokacija","vlasnik","radnoVreme","opis","tagovi","email","password"])
+            body: JSON.stringify(lokal)
         });
 
         switch(response.status){
             case 200: {
-                console.log(await response.json());
-                return true;
+                // console.log(await response.json());
+                return response.json();
             }
             case 400:{
                 console.log(`Client error: ${await response.text()}`);
@@ -439,13 +439,12 @@ export class Api
                 "Content-type":"application/json",
             },
             method:"POST",
-            body: JSON.stringify(korisnik,["name","lastName","email","password","inbox"])
+            body: JSON.stringify(korisnik)
         });
 
         switch(response.status){
             case 200: {
-                console.log(await response.json());
-                return true;
+                return response.json();
             }
             case 400:{
                 console.log(`Client error: ${await response.text()}`);
@@ -468,7 +467,7 @@ export class Api
                 "Content-type":"application/json",
             },
             method:"POST",
-            body:JSON.stringify(dogadjaj,[ "name",dogadjaj.organizator,["lokalID","name","lokacija","vlasnik","radnoVreme","opis","tagovi","email","password"],"korisnici","datum","listaTagova"])
+            body:JSON.stringify(dogadjaj)
             // body: JSON.stringify(dogadjaj,[ "name","organizator","korisnici","datum","listaTagova"])
         });
 

@@ -148,33 +148,69 @@ namespace WhereTo.Controllers
         [HttpPost]
         public ActionResult<Dogadjaj> CreateDogadjaj(Dogadjaj dogadjaj)
         {
-            var resp= new Dogadjaj();
+           var resp= new Dogadjaj();
             if(dogadjaj.listaTagova!=null)
             {
                 int ponavljanjeTaga=0;
-                        foreach(var el in dogadjaj.listaTagova)
-                            if(String.Equals(el,"Dogadjaj")==true)
-                                ponavljanjeTaga++;
-                    if(ponavljanjeTaga==0)
-                        dogadjaj.listaTagova.Add("Dogadjaj");
+                    foreach(var el in dogadjaj.listaTagova)
+                        if(String.Equals(el,"Dogadjaj")==true)
+                            ponavljanjeTaga++;
+                if(ponavljanjeTaga==0)
+                    dogadjaj.listaTagova.Add("Dogadjaj");
+                if(dogadjaj.Organizator!=null)
+                {
+                    var lokal=_lokrepo.GetLokalById(dogadjaj.Organizator.LokalID);
+                    if(lokal!=null)
+                    {
+                        if(lokal.Dogadjaji!=null)
+                        {
+                            lokal.Dogadjaji.Add(dogadjaj.DogadjajID);
+                            foreach(var dogID in lokal.Dogadjaji)
+                                    {
+                                        var dog=_repo.GetDogadjajById(dogID);
+                                        if(dog!=null)
+                                        {
+                                        dog.Organizator=lokal;
+                                        _repo.ChangeDogadjaj(dog);
+                                        }
+                                    }
+                        }
+                        dogadjaj.Organizator=lokal;
+                        _lokrepo.ChangeLokal(lokal);  
+                    }
+                }
+                resp=_repo.CreateDogadjaj(dogadjaj);
             }
             else
             {
-                dogadjaj.listaTagova?.Add("Dogadjaj");
-            }
-            resp=_repo.CreateDogadjaj(dogadjaj);
-            if(resp!=null)
-            {
-                if(dogadjaj.Organizator!=null)
+                 if(dogadjaj.Organizator!=null)
                 {
-                    var lok= _lokrepo.GetLokalById(dogadjaj.Organizator.LokalID);
-                    if(lok!=null)
-                        lok.Dogadjaji?.Add(resp.DogadjajID);
-                    else return BadRequest(dogadjaj.Organizator.LokalID);
-                    return Ok(resp);
+                    var lokal=_lokrepo.GetLokalById(dogadjaj.Organizator.LokalID);
+                    if(lokal!=null)
+                    {
+                        if(lokal.Dogadjaji!=null)
+                        {
+                            lokal.Dogadjaji.Add(dogadjaj.DogadjajID);
+                            foreach(var dogID in lokal.Dogadjaji)
+                                    {
+                                        var dog=_repo.GetDogadjajById(dogID);
+                                        if(dog!=null)
+                                        {
+                                        dog.Organizator=lokal;
+                                        _repo.ChangeDogadjaj(dog);
+                                        }
+                                    }
+                        }
+                        dogadjaj.Organizator=lokal;
+                        _lokrepo.ChangeLokal(lokal);  
+                    }
                 }
-                else return BadRequest("Nema lokala u dogadjaju!");
+                dogadjaj.listaTagova?.Add("Dogadjaj");
+                resp=_repo.CreateDogadjaj(dogadjaj);
             }
+            
+            if(resp!=null)
+                return Ok(resp);
             else 
                 return BadRequest("Somethihng went wrong");
         }

@@ -17,12 +17,22 @@ reg.onclick=async function()
     {
         var list=[]
         console.log(ime,lokacija,vlasnik,radnoVreme,opis,email,pass);
-        var log = await api.dodajLokal(new Lokal(null,ime,lokacija,vlasnik,radnoVreme,opis,null,list,email,pass));
-        if(log instanceof Lokal && log!=null)
+        var l={"name":ime,"lokacija":lokacija,"vlasnik":vlasnik,"radnoVreme":radnoVreme,
+        "opis":opis,"email":email,"password":pass,"dogadjaji":[],"tagovi":[]}
+        var lok= new Lokal();
+        lok=l;
+        console.log(JSON.stringify(l))
+        sessionStorage.setItem("logLokal",JSON.stringify(lok));
+        var log = await api.dodajLokal(l);
+        if(log!=null)
         {
-            console.log("jeeeej");
-            sessionStorage.setItem("logLokal",JSON.stringify(log));
-            window.location.href = "index-club.html";
+            var log= await api.getLokalPrijava(email,pass);
+            console.log(log);
+            if(log instanceof Lokal && log!=null)
+                {
+                    sessionStorage.setItem("logLokal",JSON.stringify(log));
+                    window.location.href = "index-club.html";
+                }
         }
         else
             alert("Neuspesna prijava!")

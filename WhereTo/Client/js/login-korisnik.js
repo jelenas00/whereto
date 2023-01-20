@@ -12,13 +12,18 @@ reg.onclick=async function()
     var repass=document.getElementById("comfirm_password").value;
     if(pass===repass)
     {
-        console.log(pass);
-        var log = await api.dodajKorisnika(new Korisnik(null,ime,prezime,email,pass,null));
-        if(log instanceof Korisnik && log!=null)
+        var kor= { "name": ime, "lastName": prezime,"email": email,"password": pass, "inbox": [] }
+        var log = await api.dodajKorisnika(kor);
+        if(log!=null)
         {
-            console.log("jeeeej")
-            sessionStorage.setItem("logKorisnik",JSON.stringify(log));
-            window.location.href = "index-korisnik.html";
+            var log= await api.getKorisnikaPrijava(email,pass);
+            console.log(log);
+            if(log instanceof Korisnik && log!=null)
+                {
+                    console.log("jeeeej")
+                    sessionStorage.setItem("logKorisnik",JSON.stringify(log));
+                    window.location.href = "index-korisnik.html";
+                }
         }
         else
             alert("Neuspesna prijava!")
