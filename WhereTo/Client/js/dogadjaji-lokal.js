@@ -9,7 +9,7 @@ dog.forEach((el,index) => {
     var d=el.datum.split('-');
     sekcija.innerHTML+=`
     <li>
-                <span  class="dropcap_1"> ${d[2]+"."+d[1]} <!--30--><span><!--august--></span></span>
+                <span  class="dropcap_1"> ${d[2]+"."+d[1]+"."} <!--30--><span><!--august--></span></span>
                   <p><span style="font-size: 30px;  color:rgb(212, 100, 237)" class="color1"><strong> ${el.name} </strong> </span><br>
                     <br>
                     <strong> lokacija :</strong>  <em> ${el.organizator.lokacija} </em>
@@ -32,10 +32,11 @@ toggle.forEach(el=>{
       let prikazi=document.getElementById("showdog");
       prikazi.innerHTML=`
       <p id="welcom" style="text-align: center;">${dog[el.id].name} </h2>
-                  <p style="font-size: 14px" class="color1">  Datum: ${d[2]+"."+d[1]+"."+d[0]} </p>
-                  <p style="font-size: 14px" class="color1">  Tagovi: ${tags} </p>
-
-                  <p style="text-align: end;"><a href="#" class="izmeni">Dodaj tagove</a><br><a href="#" class="obrisi">Obrisi dogadjaj</a></p>
+        <br>
+                  <div style="font-size: 15px" class="color1-izmena"> <strong> Datum: </strong> <em>${d[2]+"."+d[1]+"."+d[0]+"."} </em>  </div>
+                  <div style="font-size: 15px" class="color1-izmena">  <strong> Tagovi: </strong> <em>${tags}</em>  </div>
+        <br><br>
+                  <p style="text-align: end; font-size:18px;"><a href="#" class="izmeni">Dodaj tagove</a><br><a href="#" class="obrisi">Obrisi dogadjaj</a></p>
       `
       let izmeni=document.querySelector("a.izmeni");
         izmeni.onclick=(ev)=>{

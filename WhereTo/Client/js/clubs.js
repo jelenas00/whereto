@@ -35,12 +35,13 @@ toggle.forEach(el=>{
     var prikazi=document.getElementById("proba2")
     console.log(prikazi)
     prikazi.innerHTML=`
-    <p id="welcom">${lok[el.id].name} </h2>
-                <p style="font-size: 18px" class="color1">${lok[el.id].opis}</p>
-                <p style="font-size: 18px" class="color1">  Lokacija: ${lok[el.id].lokacija} </p>
-                <p style="font-size: 18px" class="color1">  vlasnik: ${lok[el.id].vlasnik} </p>
-                <p style="font-size: 18px" class="color1">  radno vreme: ${lok[el.id].radnoVreme} </p>
-                <p style="font-size: 18px" class="pad_bot1">Pronađite klub, kafanu, pivnicu, splav za vaš savršen provod.</p>
+    <p class="welcom2">${lok[el.id].name} </h2>
+                <p style="font-size: 18px" class="color1-izmena">${lok[el.id].opis}</p>
+                <div style="font-size: 15px" class="color1-izmena">  <strong> lokacija: </strong> <em> ${lok[el.id].lokacija} </em> </div>
+                <div style="font-size: 15px" class="color1-izmena"> <strong> vlasnik: </strong> <em> ${lok[el.id].vlasnik} </em></div>
+                <div style="font-size: 15px" class="color1-izmena">  <strong>radno vreme:</strong> ${lok[el.id].radnoVreme} </div>
+                <br>
+                
     `
   }
 })
