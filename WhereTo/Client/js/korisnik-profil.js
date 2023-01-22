@@ -23,23 +23,23 @@ potvrda.onclick=(ev)=>{
     var val1=changeKor(newKor)
     var val2=changeKred(kor.korisnikID,email,pass)
     if(val1&&val2){
-        
+        sessionStorage.setItem("logKorisnik",JSON.stringify(newKor));
         window.location.reload();
     }
 }
 async function changeKor(newKor){
     var ch= await api.izmeniKorisnika(newKor);
     if(ch!=false){
-        sessionStorage.setItem("logKorisnik",JSON.stringify(ch));
+        
+        return true;
     }
 }
 
 async function changeKred(id,email,pass){
     var ch= await api.izmeniKorisnikaLogInfo(id,email,pass);
     if(ch==true){
-        kor.email=email
-        kor.password=pass
-        sessionStorage.setItem("logKorisnik",JSON.stringify(kor));
+
+
         return true;
     }
 }

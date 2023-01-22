@@ -107,7 +107,8 @@ namespace WhereTo.Controllers
         [HttpPut]//(Name="ChangeKorisnik")]
         public ActionResult<Korisnik>? ChangeKorisnik(Korisnik korisnik)
         {
-                var izmena=_repo.ChangeKorisnik(korisnik);
+                _repo.CreateKorisnik(korisnik);
+                var izmena=_repo.GetKorisnikById(korisnik.KorisnikID);
                 return Ok(izmena);          
         }
 
