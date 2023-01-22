@@ -89,6 +89,15 @@ p#welcom {
 	margin-left:-5px;
 	color: white;
 }
+.welcom2{
+	font-size:45px;
+	line-height:1.2em;
+	padding:0 0 9px 0;
+	letter-spacing:-4px;
+	margin-left:-5px;
+	color: rgb(159, 46, 201);
+}
+
 h2 strong {
 	font-weight:700;
 	color:#7532a9;
@@ -194,6 +203,9 @@ header {
 }
 .color1 {
 	color:#fff
+}
+.color1-izmena{
+	color:#797979
 }
 .color2 {
 	color:#7532a9
