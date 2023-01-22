@@ -38,16 +38,32 @@
     <div class="box">
       <!--content -->
       <article id="content">
+          <!-- <h2 style="text-decoration: underline;" id="pregledSvih">Pregled svih dogadjaja</h2> -->
+           
+          
         <div class="wrapper">
-          <h2>Pregled svih dogadjaja</h2>
-            <div class="search"> <p style="text-align: end; font-size: 20px;">Tag search:</p> <input id="search" type="text" placeholder="Search...">
-                  </div>
-              <div class="dogadjajidiv">
-                <div id="dogadjaji"></div>
-                <div class="showdog"></div>
+          
+          <div class="wrapper">
+            <button style="margin: 3px;" class="lepibutton" type="submit" id="pregledSvih">Svi dogadjaji</button>
+            <div class="wrapper" > 
+              
+              <div class="search">
+                <p style="text-align: end; font-size: 20px; margin: 5px;">Tag search:</p> 
+                <input id="searchinput" type="text" placeholder="Search..." style="height: 30px; margin: 5px; width: 100px;">
+                <button style="margin: 5px;" class="lepibutton" type="submit" id="search"> Submit </button>
+                <p style="text-align: end; font-size: 20px; margin: 5px;">Date search:</p> 
+                <input id="datesrch" type="date" placeholder="date.today" style="height: 30px; margin: 5px;">
+                <button style="margin: 5px;" class="lepibutton" type="submit" id="searchDate"> Submit </button>
+              </div>
+              </div> 
+              <br>
+              <div>
+                <ul id="dogadjaji">
+                </ul>
               </div>
         </div>
       </article>
+      <!--content end-->
       <!--content end-->
       <!--footer -->
       <footer>

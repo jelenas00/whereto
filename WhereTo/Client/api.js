@@ -162,7 +162,8 @@ export class Api
         {
             case 200:
                 {
-                    console.log(`Klijenti su obavesteni  ${await response.text()}`)
+                    console.log(`Korisnici su obavesteni  ${await response.text()}`)
+                    return true;
                 }
             case 400:{
                 console.log(`Client error: ${await response.text()}`);
@@ -362,7 +363,7 @@ export class Api
                 }
             case 204:
                 {
-                    return "Server ne vraca podatke";
+                    return "Server ne vraca podatke, jer nema podataka za zadati tag";
                 }
             case 400:{
                 console.log(`Client error: ${await response.text()}`);
