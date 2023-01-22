@@ -7,6 +7,8 @@ export class Api
     constructor(){}
 
     //DELETE////////////////////////////////////////////
+   
+
     async deleteDogadjaj(id)
     {
         let response= await fetch("http://localhost:5089/api/Dogadjaj/DeleteDogadjaj/"+id,
@@ -647,6 +649,33 @@ export class Api
         switch(response.status){
             case 200: {
                 console.log(await response.json());
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+
+    async deleteInbox(id)
+    {
+        let response= await fetch("http://localhost:5089/api/Korisnik/IsprazniInbox/"+id,
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT"
+        });
+        switch(response.status){
+            case 200: {
+                console.log(`Uspesno izbrisan dogadjaj`);
                 return true;
             }
             case 400:{

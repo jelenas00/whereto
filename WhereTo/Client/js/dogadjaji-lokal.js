@@ -70,6 +70,7 @@ async function posaljiPoruku(dog){
     var ch= await api.obavestiKorisnike(dog,por)
     if(ch==true){
         alert("Korisnici su obavesteni!")
+        window.location.reload()
     }
     else if(ch==false){
         alert("Neuspesno slanje poruke, molimo pokusajte kasnije!")

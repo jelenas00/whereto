@@ -165,18 +165,23 @@ namespace WhereTo.Controllers
         }
         [Route("IsprazniInbox/{id}")]
         [HttpPut]
-        public ActionResult<Korisnik> isprazniInbox(string id)
+        public object isprazniInbox(string id)
         {
             var korisnik=_repo.GetKorisnikById(id);
 
            if(korisnik!=null)
            {
+                
                 if(korisnik.inbox!=null)
                 {
-                    foreach(var por in korisnik.inbox)
-                        korisnik.inbox.Remove(por);
+                    lock(korisnik.inbox)
+                    {
+                        korisnik.inbox.Clear();
+                        _repo.ChangeKorisnik(korisnik);
+                    }
+                    
                 }
-                _repo.ChangeKorisnik(korisnik);
+                
            }
            
            return Ok(korisnik);

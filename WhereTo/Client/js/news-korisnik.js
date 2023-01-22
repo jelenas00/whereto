@@ -23,3 +23,17 @@ else{
         `
     });
 }
+
+var isprazniInbox= document.getElementById("isprazniInbox")
+isprazniInbox.onclick=async (ev)=>{
+    var ch= await api.deleteInbox(kor.korisnikID)
+    if(ch==true){
+        alert("Inbox ispraznjen!");
+        kor.inbox=[]
+        sessionStorage.setItem("logKorisnik",JSON.stringify(kor));
+        window.location.reload()
+    }
+    else{
+        alert("Something went wrong,try again later! :(")
+    }
+}
